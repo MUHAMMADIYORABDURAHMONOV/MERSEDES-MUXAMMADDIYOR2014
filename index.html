@@ -1,0 +1,2562 @@
+<!DOCTYPE html>
+<html lang="uz" class="dark">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MERCEDES-BENZ — Luxury Automotive Showcase (Demo)</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Inter:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet" />
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'system-ui', 'sans-serif'],
+            display: ['Cinzel', 'Georgia', 'serif'],
+          },
+          colors: {
+            obsidian: '#09090b',
+            charcoal: '#111114',
+            graphite: '#18181d',
+            silver: '#c7ccd4',
+            platinum: '#e4e7ec',
+            accent: '#00a19b',
+          },
+          boxShadow: {
+            luxury: '0 20px 50px rgba(0, 0, 0, 0.45)',
+            silverGlow: '0 0 0 1px rgba(199, 204, 212, 0.22), 0 14px 35px rgba(0, 0, 0, 0.35)',
+          },
+        },
+      },
+    };
+  </script>
+  <style>
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Inter', system-ui, sans-serif;
+      overflow-x: hidden;
+    }
+
+    .font-luxury {
+      font-family: 'Cinzel', Georgia, serif;
+    }
+
+    .silver-gradient-text {
+      background: linear-gradient(135deg, #ffffff 0%, #c7ccd4 52%, #8e95a2 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    html:not(.dark) .silver-gradient-text {
+      background: linear-gradient(135deg, #09090b 0%, #374151 55%, #111827 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .glass-nav {
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+    }
+
+    .card-hover {
+      transition: transform 0.32s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.32s cubic-bezier(0.22, 1, 0.36, 1), border-color 0.3s ease;
+    }
+
+    .card-hover:hover {
+      transform: translateY(-6px);
+    }
+
+    .custom-scrollbar::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+
+    .custom-scrollbar::-webkit-scrollbar-track {
+      background: rgba(120, 120, 130, 0.12);
+      border-radius: 999px;
+    }
+
+    .custom-scrollbar::-webkit-scrollbar-thumb {
+      background: rgba(150, 155, 165, 0.45);
+      border-radius: 999px;
+    }
+  </style>
+</head>
+
+<body
+  class="bg-zinc-50 text-zinc-900 dark:bg-obsidian dark:text-zinc-100 transition-colors duration-300 antialiased selection:bg-zinc-700 selection:text-white">
+
+  <!-- Toast Notification Container -->
+  <div id="toastContainer"
+    class="fixed bottom-5 right-5 z-[100] flex flex-col gap-2.5 max-w-sm w-full px-4 sm:px-0 pointer-events-none"
+    aria-live="polite"></div>
+
+  <!-- Sticky Luxury Navbar -->
+  <header id="mainNavbar"
+    class="sticky top-0 z-50 glass-nav bg-white/85 dark:bg-obsidian/85 border-b border-zinc-200/80 dark:border-zinc-800/80 transition-colors duration-300">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-16 lg:h-20 gap-3">
+
+        <!-- Brand Logo + 3-Pointed Star SVG -->
+        <a href="#home" class="flex items-center gap-3 shrink-0 group focus:outline-none">
+          <div
+            class="w-10 h-10 sm:w-11 sm:h-11 rounded-full border border-zinc-400/50 dark:border-zinc-500/50 flex items-center justify-center bg-zinc-100 dark:bg-graphite group-hover:border-zinc-900 dark:group-hover:border-white transition-all duration-300">
+            <svg
+              class="w-6 h-6 sm:w-7 sm:h-7 text-zinc-900 dark:text-zinc-100 transition-transform duration-500 group-hover:rotate-12"
+              viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <circle cx="50" cy="50" r="45" stroke="currentColor" stroke-width="3.5" />
+              <polygon points="50,10 55,47 86,72 50,56 14,72 45,47" fill="currentColor" />
+            </svg>
+          </div>
+          <div class="flex flex-col">
+            <span
+              class="font-luxury text-xs sm:text-sm tracking-[0.22em] font-semibold text-zinc-900 dark:text-white">MERCEDES-BENZ</span>
+            <span data-i18n="brandSubtitle"
+              class="text-[10px] tracking-[0.18em] uppercase text-zinc-500 dark:text-zinc-400">Demo Showcase</span>
+          </div>
+        </a>
+
+        <!-- Desktop Navigation Links -->
+        <nav class="hidden xl:flex items-center gap-6 text-sm font-medium" aria-label="Primary Navigation">
+          <a href="#home" data-i18n="nav.home"
+            class="text-zinc-700 dark:text-zinc-300 hover:text-zinc-950 dark:hover:text-white transition-colors">Home</a>
+          <a href="#models" data-i18n="nav.models"
+            class="text-zinc-700 dark:text-zinc-300 hover:text-zinc-950 dark:hover:text-white transition-colors">Models</a>
+          <a href="#electric" data-i18n="nav.electric"
+            class="text-zinc-700 dark:text-zinc-300 hover:text-zinc-950 dark:hover:text-white transition-colors">Electric</a>
+          <a href="#amg" data-i18n="nav.amg"
+            class="text-zinc-700 dark:text-zinc-300 hover:text-zinc-950 dark:hover:text-white transition-colors">AMG</a>
+          <a href="#maybach" data-i18n="nav.maybach"
+            class="text-zinc-700 dark:text-zinc-300 hover:text-zinc-950 dark:hover:text-white transition-colors">Maybach</a>
+          <a href="#about" data-i18n="nav.about"
+            class="text-zinc-700 dark:text-zinc-300 hover:text-zinc-950 dark:hover:text-white transition-colors">About
+            Us</a>
+          <a href="#contact" data-i18n="nav.contact"
+            class="text-zinc-700 dark:text-zinc-300 hover:text-zinc-950 dark:hover:text-white transition-colors">Contact</a>
+        </nav>
+
+        <!-- Right Controls: Language, Theme, Favorites, Compare, Account, Mobile Menu -->
+        <div class="flex items-center gap-1.5 sm:gap-2">
+
+          <!-- Language Selector -->
+          <div class="relative">
+            <label for="languageSelect" class="sr-only" data-i18n="langLabel">Language</label>
+            <select id="languageSelect" aria-label="Language Selector"
+              class="h-9 sm:h-10 px-2.5 sm:px-3 rounded-lg text-xs sm:text-sm font-medium bg-zinc-100 dark:bg-graphite text-zinc-900 dark:text-zinc-100 border border-zinc-300/80 dark:border-zinc-700/80 focus:outline-none focus:ring-2 focus:ring-zinc-500 cursor-pointer">
+              <option value="uz">🇺🇿 O‘zbek</option>
+              <option value="en">🇬🇧 English</option>
+              <option value="ru">🇷🇺 Русский</option>
+            </select>
+          </div>
+
+          <!-- Dark / Light Theme Toggle -->
+          <button id="themeToggleBtn" type="button" aria-label="Toggle Dark or Light Mode"
+            class="h-9 sm:h-10 w-9 sm:w-10 rounded-lg border border-zinc-300/80 dark:border-zinc-700/80 bg-zinc-100 dark:bg-graphite text-zinc-800 dark:text-zinc-200 hover:bg-zinc-200 dark:hover:bg-zinc-800 flex items-center justify-center transition-colors">
+            <!-- Sun Icon (shown in dark mode) -->
+            <svg id="sunIcon" class="w-4 h-4 hidden dark:block" fill="none" stroke="currentColor" stroke-width="2"
+              viewBox="0 0 24 24">
+              <circle cx="12" cy="12" r="4" />
+              <path
+                d="M12 2v2m0 16v2M4.93 4.93l1.41 1.41m11.32 11.32l1.41 1.41M2 12h2m16 0h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41" />
+            </svg>
+            <!-- Moon Icon (shown in light mode) -->
+            <svg id="moonIcon" class="w-4 h-4 block dark:hidden" fill="none" stroke="currentColor" stroke-width="2"
+              viewBox="0 0 24 24">
+              <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
+            </svg>
+          </button>
+
+          <!-- Favorites Button -->
+          <button id="openFavoritesBtn" type="button"
+            class="relative h-9 sm:h-10 px-2.5 sm:px-3 rounded-lg border border-zinc-300/80 dark:border-zinc-700/80 bg-zinc-100 dark:bg-graphite text-zinc-800 dark:text-zinc-200 hover:bg-zinc-200 dark:hover:bg-zinc-800 flex items-center gap-1.5 text-xs sm:text-sm font-medium transition-colors">
+            <svg class="w-4 h-4 text-rose-500" fill="currentColor" viewBox="0 0 24 24">
+              <path
+                d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
+            </svg>
+            <span class="hidden md:inline" data-i18n="nav.favorites">Favorites</span>
+            <span id="favoritesCountBadge"
+              class="px-1.5 py-0.5 text-[11px] font-semibold rounded-full bg-zinc-900 text-white dark:bg-white dark:text-zinc-900">0</span>
+          </button>
+
+          <!-- Compare Button -->
+          <button id="openCompareBtn" type="button"
+            class="relative h-9 sm:h-10 px-2.5 sm:px-3 rounded-lg border border-zinc-300/80 dark:border-zinc-700/80 bg-zinc-100 dark:bg-graphite text-zinc-800 dark:text-zinc-200 hover:bg-zinc-200 dark:hover:bg-zinc-800 flex items-center gap-1.5 text-xs sm:text-sm font-medium transition-colors">
+            <svg class="w-4 h-4 text-zinc-700 dark:text-zinc-300" fill="none" stroke="currentColor" stroke-width="2"
+              viewBox="0 0 24 24">
+              <path d="M18 20V10M12 20V4M6 20v-6" />
+            </svg>
+            <span class="hidden md:inline" data-i18n="nav.compare">Compare</span>
+            <span id="compareCountBadge"
+              class="px-1.5 py-0.5 text-[11px] font-semibold rounded-full bg-zinc-900 text-white dark:bg-white dark:text-zinc-900">0</span>
+          </button>
+
+          <!-- Login / Register Button -->
+          <button id="openAuthBtn" type="button"
+            class="hidden sm:flex h-9 sm:h-10 px-3.5 rounded-lg bg-zinc-900 dark:bg-white text-white dark:text-zinc-950 hover:bg-zinc-800 dark:hover:bg-zinc-200 items-center gap-1.5 text-xs sm:text-sm font-semibold transition-colors">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+              <circle cx="12" cy="7" r="4" />
+            </svg>
+            <span id="authNavLabel" data-i18n="nav.account">Login / Register</span>
+          </button>
+
+          <!-- Mobile Hamburger Button -->
+          <button id="mobileMenuBtn" type="button" aria-label="Open Mobile Menu" aria-expanded="false"
+            class="xl:hidden h-9 sm:h-10 w-9 sm:w-10 rounded-lg border border-zinc-300/80 dark:border-zinc-700/80 bg-zinc-100 dark:bg-graphite text-zinc-900 dark:text-zinc-100 flex items-center justify-center hover:bg-zinc-200 dark:hover:bg-zinc-800 transition-colors">
+            <svg id="hamburgerIcon" class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2"
+              viewBox="0 0 24 24">
+              <path d="M4 6h16M4 12h16M4 18h16" />
+            </svg>
+            <svg id="closeMenuIcon" class="w-5 h-5 hidden" fill="none" stroke="currentColor" stroke-width="2"
+              viewBox="0 0 24 24">
+              <path d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </button>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- Mobile Navigation Drawer -->
+    <div id="mobileMenuPanel"
+      class="hidden xl:hidden border-t border-zinc-200/80 dark:border-zinc-800/80 bg-white dark:bg-charcoal px-4 py-4 space-y-2">
+      <a href="#home" data-i18n="nav.home"
+        class="mobile-nav-link block px-3 py-2.5 rounded-lg text-sm font-medium text-zinc-800 dark:text-zinc-200 hover:bg-zinc-100 dark:hover:bg-graphite">Home</a>
+      <a href="#models" data-i18n="nav.models"
+        class="mobile-nav-link block px-3 py-2.5 rounded-lg text-sm font-medium text-zinc-800 dark:text-zinc-200 hover:bg-zinc-100 dark:hover:bg-graphite">Models</a>
+      <a href="#electric" data-i18n="nav.electric"
+        class="mobile-nav-link block px-3 py-2.5 rounded-lg text-sm font-medium text-zinc-800 dark:text-zinc-200 hover:bg-zinc-100 dark:hover:bg-graphite">Electric</a>
+      <a href="#amg" data-i18n="nav.amg"
+        class="mobile-nav-link block px-3 py-2.5 rounded-lg text-sm font-medium text-zinc-800 dark:text-zinc-200 hover:bg-zinc-100 dark:hover:bg-graphite">AMG</a>
+      <a href="#maybach" data-i18n="nav.maybach"
+        class="mobile-nav-link block px-3 py-2.5 rounded-lg text-sm font-medium text-zinc-800 dark:text-zinc-200 hover:bg-zinc-100 dark:hover:bg-graphite">Maybach</a>
+      <a href="#about" data-i18n="nav.about"
+        class="mobile-nav-link block px-3 py-2.5 rounded-lg text-sm font-medium text-zinc-800 dark:text-zinc-200 hover:bg-zinc-100 dark:hover:bg-graphite">About
+        Us</a>
+      <a href="#contact" data-i18n="nav.contact"
+        class="mobile-nav-link block px-3 py-2.5 rounded-lg text-sm font-medium text-zinc-800 dark:text-zinc-200 hover:bg-zinc-100 dark:hover:bg-graphite">Contact</a>
+      <div class="pt-2 border-t border-zinc-200 dark:border-zinc-800 flex items-center justify-between gap-2">
+        <button id="mobileAuthBtn" type="button"
+          class="w-full py-2.5 px-4 rounded-lg bg-zinc-900 dark:bg-white text-white dark:text-zinc-950 text-sm font-semibold">
+          <span data-i18n="nav.account">Login / Register</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main>
+
+    <!-- Full-Bleed Hero Section -->
+    <section id="home" class="relative overflow-hidden bg-zinc-950 text-white">
+      <div class="relative min-h-[76vh] lg:min-h-[84vh] flex items-end">
+        <img id="heroSlideImage"
+          src="https://images.unsplash.com/photo-1618843479313-40f8afb4b4d8?auto=format&fit=crop&w=1920&q=85"
+          alt="Mercedes-Benz Flagship Showcase"
+          class="absolute inset-0 w-full h-full object-cover object-center opacity-65 transition-all duration-700"
+          onerror="handleImageFallback(this, 'MERCEDES-BENZ')" />
+        <div class="absolute inset-0 bg-gradient-to-t from-zinc-950 via-zinc-950/60 to-zinc-950/35"></div>
+
+        <div class="relative z-10 max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 py-14 sm:py-20">
+          <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-end">
+            <div class="lg:col-span-8 space-y-5">
+              <div
+                class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/10 border border-white/20 backdrop-blur-md text-xs tracking-widest uppercase text-zinc-200">
+                <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
+                <span data-i18n="hero.badge">Demo Showcase • Illustrative Pricing & Specs</span>
+              </div>
+
+              <h1 id="heroTitle" data-i18n="hero.title"
+                class="font-luxury text-3xl sm:text-5xl lg:text-6xl font-bold tracking-tight leading-tight">
+                The Pinnacle of Luxury & Precision Engineering
+              </h1>
+
+              <p id="heroSubtitle" data-i18n="hero.subtitle"
+                class="text-base sm:text-lg text-zinc-300 max-w-2xl leading-relaxed">
+                Explore 30 curated Mercedes-Benz, Mercedes-AMG, Mercedes-Maybach, and all-electric models in an
+                interactive luxury showroom experience.
+              </p>
+
+              <!-- Hero CTA Buttons -->
+              <div class="flex flex-wrap items-center gap-3 pt-2">
+                <a href="#models" data-i18n="hero.exploreBtn"
+                  class="px-6 py-3.5 rounded-xl bg-white text-zinc-950 hover:bg-zinc-200 font-semibold text-sm transition-all shadow-lg">
+                  Explore Models
+                </a>
+                <button id="heroTestDriveBtn" type="button" data-i18n="hero.testDriveBtn"
+                  class="px-6 py-3.5 rounded-xl bg-zinc-900/80 hover:bg-zinc-800 text-white border border-zinc-700 font-semibold text-sm backdrop-blur-md transition-all">
+                  Book Test Drive
+                </button>
+                <button id="nextHeroSlideBtn" type="button"
+                  class="h-12 w-12 rounded-xl bg-white/10 hover:bg-white/20 border border-white/20 flex items-center justify-center transition-colors"
+                  aria-label="Next Hero Slide">
+                  <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                    <path d="M9 5l7 7-7 7" />
+                  </svg>
+                </button>
+              </div>
+
+              <!-- Slide Indicators -->
+              <div class="flex items-center gap-2 pt-1">
+                <button type="button" data-slide="0" class="hero-dot h-1.5 w-8 rounded-full bg-white transition-all"
+                  aria-label="Slide 1"></button>
+                <button type="button" data-slide="1"
+                  class="hero-dot h-1.5 w-3 rounded-full bg-white/40 hover:bg-white/70 transition-all"
+                  aria-label="Slide 2"></button>
+                <button type="button" data-slide="2"
+                  class="hero-dot h-1.5 w-3 rounded-full bg-white/40 hover:bg-white/70 transition-all"
+                  aria-label="Slide 3"></button>
+              </div>
+            </div>
+
+            <!-- Quick Stats Panel -->
+            <div class="lg:col-span-4 grid grid-cols-3 lg:grid-cols-1 gap-3">
+              <div class="p-4 rounded-2xl bg-zinc-900/80 border border-zinc-800/90 backdrop-blur-md">
+                <div class="text-2xl sm:text-3xl font-bold text-white">30</div>
+                <div data-i18n="hero.statModels" class="text-xs text-zinc-400 mt-0.5">Demo Vehicle Models</div>
+              </div>
+              <div class="p-4 rounded-2xl bg-zinc-900/80 border border-zinc-800/90 backdrop-blur-md">
+                <div class="text-2xl sm:text-3xl font-bold text-white">3</div>
+                <div data-i18n="hero.statLanguages" class="text-xs text-zinc-400 mt-0.5">Languages (UZ / EN / RU)</div>
+              </div>
+              <div class="p-4 rounded-2xl bg-zinc-900/80 border border-zinc-800/90 backdrop-blur-md">
+                <div class="text-2xl sm:text-3xl font-bold text-white">EQ • AMG • M</div>
+                <div data-i18n="hero.statDivisions" class="text-xs text-zinc-400 mt-0.5">Signature Divisions</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Demo Data Disclaimer Banner -->
+    <div class="bg-zinc-200/80 dark:bg-graphite border-y border-zinc-300 dark:border-zinc-800">
+      <div
+        class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-2.5 flex flex-col sm:flex-row items-center justify-between gap-2 text-xs text-zinc-700 dark:text-zinc-300">
+        <span data-i18n="disclaimer">Notice: All vehicle prices, specifications, and availability figures in this
+          showcase are demo / illustrative data for interactive preview purposes.</span>
+        <span
+          class="font-semibold tracking-wider uppercase text-[11px] px-2 py-0.5 rounded bg-zinc-900 text-white dark:bg-zinc-100 dark:text-zinc-900">DEMO
+          DATA</span>
+      </div>
+    </div>
+
+    <!-- Search, Filter, Sort & Complete 30-Model Showcase -->
+    <section id="models" class="py-16 sm:py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-8">
+        <div>
+          <span data-i18n="catalog.eyebrow"
+            class="text-xs uppercase tracking-[0.22em] text-zinc-500 dark:text-zinc-400 font-semibold">Complete
+            Lineup</span>
+          <h2 data-i18n="catalog.title" class="font-luxury text-2xl sm:text-4xl font-bold silver-gradient-text mt-1">
+            Mercedes-Benz Models (30 Demo Vehicles)</h2>
+        </div>
+        <div class="text-sm text-zinc-600 dark:text-zinc-400">
+          <span data-i18n="catalog.showing">Showing</span>
+          <strong id="visibleModelsCount" class="text-zinc-900 dark:text-white">30</strong>
+          <span data-i18n="catalog.ofModels">of 30 demo models</span>
+        </div>
+      </div>
+
+      <!-- Search, Filter & Sort Control Panel -->
+      <div
+        class="p-4 sm:p-6 rounded-2xl bg-white dark:bg-charcoal border border-zinc-200 dark:border-zinc-800 shadow-sm mb-10 space-y-4">
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-12 gap-3.5">
+
+          <!-- Search Input -->
+          <div class="lg:col-span-4">
+            <label for="searchInput" data-i18n="filter.searchLabel"
+              class="block text-xs font-semibold uppercase tracking-wider text-zinc-500 dark:text-zinc-400 mb-1.5">Search
+              Model or Keyword</label>
+            <div class="relative">
+              <input id="searchInput" type="text" placeholder="S-Class, AMG G 63, EQE..."
+                class="w-full h-11 pl-10 pr-4 rounded-xl bg-zinc-50 dark:bg-graphite border border-zinc-300 dark:border-zinc-700 text-sm text-zinc-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-zinc-600" />
+              <svg class="w-4 h-4 text-zinc-400 absolute left-3.5 top-3.5" fill="none" stroke="currentColor"
+                stroke-width="2" viewBox="0 0 24 24">
+                <circle cx="11" cy="11" r="8" />
+                <path d="M21 21l-4.35-4.35" />
+              </svg>
+            </div>
+          </div>
+
+          <!-- Category / Body / Division Filter -->
+          <div class="lg:col-span-3">
+            <label for="categoryFilter" data-i18n="filter.categoryLabel"
+              class="block text-xs font-semibold uppercase tracking-wider text-zinc-500 dark:text-zinc-400 mb-1.5">Category
+              & Division</label>
+            <select id="categoryFilter"
+              class="w-full h-11 px-3.5 rounded-xl bg-zinc-50 dark:bg-graphite border border-zinc-300 dark:border-zinc-700 text-sm text-zinc-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-zinc-600 cursor-pointer">
+              <option value="all" data-i18n="filter.all">All Categories</option>
+              <option value="Sedan" data-i18n="filter.sedan">Sedan / Coupe</option>
+              <option value="SUV" data-i18n="filter.suv">SUV / Off-Road</option>
+              <option value="Electric" data-i18n="filter.electric">Electric (EQ)</option>
+              <option value="AMG" data-i18n="filter.amg">Mercedes-AMG</option>
+              <option value="Maybach" data-i18n="filter.maybach">Mercedes-Maybach</option>
+              <option value="Van" data-i18n="filter.van">Van & Commercial</option>
+            </select>
+          </div>
+
+          <!-- Fuel / Powertrain Filter -->
+          <div class="lg:col-span-2">
+            <label for="fuelFilter" data-i18n="filter.fuelLabel"
+              class="block text-xs font-semibold uppercase tracking-wider text-zinc-500 dark:text-zinc-400 mb-1.5">Powertrain</label>
+            <select id="fuelFilter"
+              class="w-full h-11 px-3.5 rounded-xl bg-zinc-50 dark:bg-graphite border border-zinc-300 dark:border-zinc-700 text-sm text-zinc-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-zinc-600 cursor-pointer">
+              <option value="all" data-i18n="filter.fuelAll">All Powertrains</option>
+              <option value="Petrol" data-i18n="filter.petrol">Petrol / Hybrid</option>
+              <option value="Electric" data-i18n="filter.electricOnly">Electric</option>
+              <option value="Diesel" data-i18n="filter.diesel">Diesel</option>
+            </select>
+          </div>
+
+          <!-- Sort Selector -->
+          <div class="lg:col-span-3">
+            <label for="sortSelect" data-i18n="filter.sortLabel"
+              class="block text-xs font-semibold uppercase tracking-wider text-zinc-500 dark:text-zinc-400 mb-1.5">Sort
+              By</label>
+            <select id="sortSelect"
+              class="w-full h-11 px-3.5 rounded-xl bg-zinc-50 dark:bg-graphite border border-zinc-300 dark:border-zinc-700 text-sm text-zinc-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-zinc-600 cursor-pointer">
+              <option value="featured" data-i18n="sort.featured">Featured Order</option>
+              <option value="priceAsc" data-i18n="sort.priceAsc">Demo Price: Low to High</option>
+              <option value="priceDesc" data-i18n="sort.priceDesc">Demo Price: High to Low</option>
+              <option value="hpDesc" data-i18n="sort.hpDesc">Horsepower: High to Low</option>
+            </select>
+          </div>
+
+        </div>
+
+        <!-- Price Range Slider + Reset Button -->
+        <div
+          class="pt-3 border-t border-zinc-200 dark:border-zinc-800 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+          <div class="flex-1 max-w-md">
+            <div class="flex items-center justify-between text-xs mb-1.5">
+              <span data-i18n="filter.maxPriceLabel"
+                class="font-semibold uppercase tracking-wider text-zinc-500 dark:text-zinc-400">Max Demo Price
+                (USD)</span>
+              <span id="maxPriceDisplay" class="font-bold text-zinc-900 dark:text-white">$260,000</span>
+            </div>
+            <input id="maxPriceRange" type="range" min="40000" max="260000" step="5000" value="260000"
+              class="w-full accent-zinc-900 dark:accent-white cursor-pointer" />
+          </div>
+
+          <button id="resetFiltersBtn" type="button"
+            class="px-4 py-2.5 rounded-xl border border-zinc-300 dark:border-zinc-700 hover:bg-zinc-100 dark:hover:bg-graphite text-xs font-semibold uppercase tracking-wider text-zinc-800 dark:text-zinc-200 transition-colors self-start sm:self-auto">
+            <span data-i18n="filter.resetBtn">Reset Filters</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Vehicles Grid -->
+      <div id="vehiclesGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+
+      <!-- Empty Search State -->
+      <div id="emptyCatalogState"
+        class="hidden text-center py-16 px-4 rounded-2xl bg-white dark:bg-charcoal border border-zinc-200 dark:border-zinc-800 mt-6">
+        <p data-i18n="catalog.noResults" class="text-base font-medium text-zinc-700 dark:text-zinc-300">No vehicles
+          matched your current filter criteria.</p>
+        <button id="emptyResetBtn" type="button" data-i18n="filter.resetBtn"
+          class="mt-4 px-5 py-2.5 rounded-xl bg-zinc-900 dark:bg-white text-white dark:text-zinc-950 text-sm font-semibold">Reset
+          Filters</button>
+      </div>
+    </section>
+
+    <!-- Dedicated Signature Divisions Section: New & Popular, Electric, AMG, Maybach -->
+    <section id="electric" class="py-16 bg-zinc-100 dark:bg-charcoal border-y border-zinc-200 dark:border-zinc-800/80">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-16">
+
+        <!-- New & Popular Models Strip -->
+        <div>
+          <div class="flex items-center justify-between mb-6">
+            <div>
+              <span data-i18n="divisions.popularEyebrow"
+                class="text-xs uppercase tracking-[0.2em] text-zinc-500 dark:text-zinc-400 font-semibold">Highlights</span>
+              <h3 data-i18n="divisions.popularTitle"
+                class="font-luxury text-2xl sm:text-3xl font-bold text-zinc-900 dark:text-white mt-1">New & Popular
+                Models</h3>
+            </div>
+          </div>
+          <div id="popularModelsGrid" class="grid grid-cols-1 md:grid-cols-3 gap-6"></div>
+        </div>
+
+        <!-- Electric Vehicles (EQ) -->
+        <div>
+          <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-3 mb-6">
+            <div>
+              <span data-i18n="divisions.eqEyebrow"
+                class="text-xs uppercase tracking-[0.2em] text-teal-600 dark:text-teal-400 font-semibold">Progressive
+                Luxury</span>
+              <h3 data-i18n="divisions.eqTitle"
+                class="font-luxury text-2xl sm:text-3xl font-bold text-zinc-900 dark:text-white mt-1">Mercedes-EQ
+                Electric Lineup</h3>
+            </div>
+            <button type="button" onclick="quickFilterDivision('Electric')" data-i18n="divisions.viewAllEq"
+              class="text-sm font-semibold underline underline-offset-4 text-zinc-800 dark:text-zinc-200 hover:text-teal-600 dark:hover:text-teal-400 self-start sm:self-auto">
+              Filter All Electric
+            </button>
+          </div>
+          <div id="electricModelsGrid" class="grid grid-cols-1 md:grid-cols-3 gap-6"></div>
+        </div>
+
+        <!-- Mercedes-AMG -->
+        <div id="amg" class="pt-2">
+          <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-3 mb-6">
+            <div>
+              <span data-i18n="divisions.amgEyebrow"
+                class="text-xs uppercase tracking-[0.2em] text-rose-600 dark:text-rose-400 font-semibold">Driving
+                Performance</span>
+              <h3 data-i18n="divisions.amgTitle"
+                class="font-luxury text-2xl sm:text-3xl font-bold text-zinc-900 dark:text-white mt-1">Mercedes-AMG
+                Performance</h3>
+            </div>
+            <button type="button" onclick="quickFilterDivision('AMG')" data-i18n="divisions.viewAllAmg"
+              class="text-sm font-semibold underline underline-offset-4 text-zinc-800 dark:text-zinc-200 hover:text-rose-500 self-start sm:self-auto">
+              Filter All AMG
+            </button>
+          </div>
+          <div id="amgModelsGrid" class="grid grid-cols-1 md:grid-cols-3 gap-6"></div>
+        </div>
+
+        <!-- Mercedes-Maybach -->
+        <div id="maybach" class="pt-2">
+          <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-3 mb-6">
+            <div>
+              <span data-i18n="divisions.maybachEyebrow"
+                class="text-xs uppercase tracking-[0.2em] text-amber-600 dark:text-amber-400 font-semibold">Ultimate
+                Chauffeur Luxury</span>
+              <h3 data-i18n="divisions.maybachTitle"
+                class="font-luxury text-2xl sm:text-3xl font-bold text-zinc-900 dark:text-white mt-1">Mercedes-Maybach
+                Atelier</h3>
+            </div>
+            <button type="button" onclick="quickFilterDivision('Maybach')" data-i18n="divisions.viewAllMaybach"
+              class="text-sm font-semibold underline underline-offset-4 text-zinc-800 dark:text-zinc-200 hover:text-amber-500 self-start sm:self-auto">
+              Filter All Maybach
+            </button>
+          </div>
+          <div id="maybachModelsGrid" class="grid grid-cols-1 md:grid-cols-3 gap-6"></div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- About Mercedes-Benz, Innovation & Technology -->
+    <section id="about" class="py-16 sm:py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-16">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+        <div class="lg:col-span-6 space-y-4">
+          <span data-i18n="about.eyebrow"
+            class="text-xs uppercase tracking-[0.22em] text-zinc-500 dark:text-zinc-400 font-semibold">Heritage &
+            Vision</span>
+          <h2 data-i18n="about.title" class="font-luxury text-2xl sm:text-4xl font-bold silver-gradient-text">About
+            Mercedes-Benz</h2>
+          <p data-i18n="about.p1" class="text-zinc-600 dark:text-zinc-300 leading-relaxed">
+            Since pioneering the automobile, Mercedes-Benz has blended sculptural design, safety leadership, and refined
+            craftsmanship across sedans, SUVs, electric vehicles, AMG performance machines, and Maybach flagship
+            lounges.
+          </p>
+          <p data-i18n="about.p2" class="text-zinc-600 dark:text-zinc-300 leading-relaxed">
+            This interactive demo portal presents 30 representative models with customizable configurations,
+            side-by-side comparison, favorites storage, test drive scheduling, and order request workflows.
+          </p>
+        </div>
+        <div class="lg:col-span-6">
+          <div class="rounded-3xl overflow-hidden border border-zinc-200 dark:border-zinc-800 shadow-luxury">
+            <img src="https://images.unsplash.com/photo-1617531653332-bd46c24f2068?auto=format&fit=crop&w=1400&q=80"
+              alt="Mercedes-Benz Craftsmanship" class="w-full h-72 sm:h-96 object-cover"
+              onerror="handleImageFallback(this, 'MERCEDES-BENZ STUDIO')" />
+          </div>
+        </div>
+      </div>
+
+      <!-- Innovation & Technology Cards -->
+      <div>
+        <h3 data-i18n="tech.title" class="font-luxury text-xl sm:text-3xl font-bold text-zinc-900 dark:text-white mb-6">
+          Innovation & Technology Highlights</h3>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div class="p-6 rounded-2xl bg-white dark:bg-charcoal border border-zinc-200 dark:border-zinc-800">
+            <div
+              class="w-10 h-10 rounded-xl bg-zinc-900 dark:bg-white text-white dark:text-zinc-950 flex items-center justify-center font-bold text-sm mb-4">
+              MBUX</div>
+            <h4 data-i18n="tech.mbuxTitle" class="text-lg font-bold text-zinc-900 dark:text-white mb-2">MBUX Hyperscreen
+              Experience</h4>
+            <p data-i18n="tech.mbuxDesc" class="text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed">Intuitive
+              panoramic displays, adaptive ambient lighting, and personalized driver profiles designed for effortless
+              cabin interaction.</p>
+          </div>
+          <div class="p-6 rounded-2xl bg-white dark:bg-charcoal border border-zinc-200 dark:border-zinc-800">
+            <div
+              class="w-10 h-10 rounded-xl bg-zinc-900 dark:bg-white text-white dark:text-zinc-950 flex items-center justify-center font-bold text-sm mb-4">
+              EQ</div>
+            <h4 data-i18n="tech.eqTitle" class="text-lg font-bold text-zinc-900 dark:text-white mb-2">Electric Drive
+              Architecture</h4>
+            <p data-i18n="tech.eqDesc" class="text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed">Whisper-quiet
+              electric powertrains, intelligent energy recuperation, and aerodynamic silhouettes engineered for
+              long-distance poise.</p>
+          </div>
+          <div class="p-6 rounded-2xl bg-white dark:bg-charcoal border border-zinc-200 dark:border-zinc-800">
+            <div
+              class="w-10 h-10 rounded-xl bg-zinc-900 dark:bg-white text-white dark:text-zinc-950 flex items-center justify-center font-bold text-sm mb-4">
+              SAFE</div>
+            <h4 data-i18n="tech.safeTitle" class="text-lg font-bold text-zinc-900 dark:text-white mb-2">Intelligent
+              Assistance Systems</h4>
+            <p data-i18n="tech.safeDesc" class="text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed">Multi-sensor
+              driver assistance, digital light illumination, and acoustic comfort suites tailored for city and highway
+              travel.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Customer Reviews & FAQ Accordion -->
+    <section class="py-16 bg-zinc-100 dark:bg-charcoal border-y border-zinc-200 dark:border-zinc-800/80">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-16">
+
+        <!-- Customer Reviews -->
+        <div>
+          <h3 data-i18n="reviews.title"
+            class="font-luxury text-xl sm:text-3xl font-bold text-zinc-900 dark:text-white mb-6">Client Impressions
+            (Demo)</h3>
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div
+              class="p-6 rounded-2xl bg-white dark:bg-graphite border border-zinc-200 dark:border-zinc-800 space-y-3">
+              <div class="text-amber-400 text-sm">★★★★★</div>
+              <p data-i18n="reviews.r1" class="text-sm text-zinc-700 dark:text-zinc-300 leading-relaxed">“Comparing the
+                S-Class, EQE, and AMG models side-by-side made exploring the lineup effortless and clear.”</p>
+              <div class="text-xs font-semibold text-zinc-500 dark:text-zinc-400">— Azizbek K., Tashkent (Demo)</div>
+            </div>
+            <div
+              class="p-6 rounded-2xl bg-white dark:bg-graphite border border-zinc-200 dark:border-zinc-800 space-y-3">
+              <div class="text-amber-400 text-sm">★★★★★</div>
+              <p data-i18n="reviews.r2" class="text-sm text-zinc-700 dark:text-zinc-300 leading-relaxed">“Clean silver
+                and obsidian styling, instant language switching, and quick test drive booking flow.”</p>
+              <div class="text-xs font-semibold text-zinc-500 dark:text-zinc-400">— Elena M., Almaty (Demo)</div>
+            </div>
+            <div
+              class="p-6 rounded-2xl bg-white dark:bg-graphite border border-zinc-200 dark:border-zinc-800 space-y-3">
+              <div class="text-amber-400 text-sm">★★★★★</div>
+              <p data-i18n="reviews.r3" class="text-sm text-zinc-700 dark:text-zinc-300 leading-relaxed">“The Maybach
+                and G-Class detail views give a great sense of exterior shades, cabin comfort, and performance specs.”
+              </p>
+              <div class="text-xs font-semibold text-zinc-500 dark:text-zinc-400">— David R., London (Demo)</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- FAQ Accordion -->
+        <div class="max-w-4xl mx-auto">
+          <h3 data-i18n="faq.title"
+            class="font-luxury text-xl sm:text-3xl font-bold text-zinc-900 dark:text-white mb-6 text-center">Frequently
+            Asked Questions</h3>
+          <div id="faqContainer" class="space-y-3"></div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Contact Us & Showroom Map -->
+    <section id="contact" class="py-16 sm:py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="mb-10">
+        <span data-i18n="contact.eyebrow"
+          class="text-xs uppercase tracking-[0.22em] text-zinc-500 dark:text-zinc-400 font-semibold">Concierge &
+          Studio</span>
+        <h2 data-i18n="contact.title" class="font-luxury text-2xl sm:text-4xl font-bold silver-gradient-text mt-1">
+          Contact Us</h2>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+        <!-- Contact Form -->
+        <form id="contactForm"
+          class="lg:col-span-7 p-6 sm:p-8 rounded-2xl bg-white dark:bg-charcoal border border-zinc-200 dark:border-zinc-800 space-y-4">
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div>
+              <label for="contactName" data-i18n="form.name"
+                class="block text-xs font-semibold uppercase tracking-wider text-zinc-500 dark:text-zinc-400 mb-1.5">Full
+                Name</label>
+              <input id="contactName" type="text" required
+                class="w-full h-11 px-3.5 rounded-xl bg-zinc-50 dark:bg-graphite border border-zinc-300 dark:border-zinc-700 text-sm focus:outline-none focus:ring-2 focus:ring-zinc-600" />
+            </div>
+            <div>
+              <label for="contactEmail" data-i18n="form.email"
+                class="block text-xs font-semibold uppercase tracking-wider text-zinc-500 dark:text-zinc-400 mb-1.5">Email
+                Address</label>
+              <input id="contactEmail" type="email" required
+                class="w-full h-11 px-3.5 rounded-xl bg-zinc-50 dark:bg-graphite border border-zinc-300 dark:border-zinc-700 text-sm focus:outline-none focus:ring-2 focus:ring-zinc-600" />
+            </div>
+          </div>
+          <div>
+            <label for="contactPhone" data-i18n="form.phone"
+              class="block text-xs font-semibold uppercase tracking-wider text-zinc-500 dark:text-zinc-400 mb-1.5">Phone
+              Number</label>
+            <input id="contactPhone" type="tel" required placeholder="+998 90 123 45 67"
+              class="w-full h-11 px-3.5 rounded-xl bg-zinc-50 dark:bg-graphite border border-zinc-300 dark:border-zinc-700 text-sm focus:outline-none focus:ring-2 focus:ring-zinc-600" />
+          </div>
+          <div>
+            <label for="contactMessage" data-i18n="form.message"
+              class="block text-xs font-semibold uppercase tracking-wider text-zinc-500 dark:text-zinc-400 mb-1.5">Message</label>
+            <textarea id="contactMessage" rows="4" required
+              class="w-full p-3.5 rounded-xl bg-zinc-50 dark:bg-graphite border border-zinc-300 dark:border-zinc-700 text-sm focus:outline-none focus:ring-2 focus:ring-zinc-600"></textarea>
+          </div>
+          <button type="submit" data-i18n="form.sendMessage"
+            class="w-full sm:w-auto px-7 py-3.5 rounded-xl bg-zinc-900 dark:bg-white text-white dark:text-zinc-950 hover:bg-zinc-800 dark:hover:bg-zinc-200 font-semibold text-sm transition-colors">
+            Send Inquiry
+          </button>
+        </form>
+
+        <!-- Studio Details & Map Embed -->
+        <div class="lg:col-span-5 space-y-6">
+          <div
+            class="p-6 rounded-2xl bg-white dark:bg-charcoal border border-zinc-200 dark:border-zinc-800 space-y-3 text-sm">
+            <h3 data-i18n="contact.studioTitle" class="font-bold text-base text-zinc-900 dark:text-white">Flagship
+              Showcase Studio (Demo)</h3>
+            <p class="text-zinc-600 dark:text-zinc-400">Amir Temur Avenue 107B, Tashkent • Mercedesplatz 1, Stuttgart
+              (Demo)</p>
+            <p class="text-zinc-700 dark:text-zinc-300 font-medium">+998 (71) 200-00-00</p>
+            <p class="text-zinc-700 dark:text-zinc-300 font-medium">concierge@mercedes-demo.example</p>
+            <div class="flex items-center gap-3 pt-2">
+              <a href="#models"
+                class="px-3 py-1.5 rounded-lg bg-zinc-100 dark:bg-graphite text-xs font-semibold hover:bg-zinc-200 dark:hover:bg-zinc-800">Instagram</a>
+              <a href="#models"
+                class="px-3 py-1.5 rounded-lg bg-zinc-100 dark:bg-graphite text-xs font-semibold hover:bg-zinc-200 dark:hover:bg-zinc-800">YouTube</a>
+              <a href="#models"
+                class="px-3 py-1.5 rounded-lg bg-zinc-100 dark:bg-graphite text-xs font-semibold hover:bg-zinc-200 dark:hover:bg-zinc-800">LinkedIn</a>
+            </div>
+          </div>
+
+          <div
+            class="rounded-2xl overflow-hidden border border-zinc-200 dark:border-zinc-800 h-60 bg-zinc-200 dark:bg-graphite">
+            <iframe title="Showroom Map"
+              src="https://www.openstreetmap.org/export/embed.html?bbox=69.2500%2C41.3100%2C69.3100%2C41.3500&amp;layer=mapnik"
+              class="w-full h-full border-0" loading="lazy"></iframe>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Luxury Footer -->
+  <footer class="bg-zinc-950 text-zinc-300 border-t border-zinc-800">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-8 pb-10 border-b border-zinc-800/80">
+        <div class="space-y-3">
+          <div class="font-luxury text-base tracking-[0.2em] text-white font-semibold">MERCEDES-BENZ</div>
+          <p data-i18n="footer.desc" class="text-xs text-zinc-400 leading-relaxed">
+            Interactive automotive showcase demonstrating modern luxury UI, multi-language support, filtering,
+            comparison, and booking flows with demo data.
+          </p>
+        </div>
+        <div>
+          <h4 data-i18n="footer.colModels" class="text-xs uppercase tracking-widest text-white font-semibold mb-3">
+            Lineup</h4>
+          <ul class="space-y-2 text-xs text-zinc-400">
+            <li><a href="#models" onclick="quickFilterDivision('Sedan')" class="hover:text-white">Sedans & Coupes</a>
+            </li>
+            <li><a href="#models" onclick="quickFilterDivision('SUV')" class="hover:text-white">SUVs & G-Class</a></li>
+            <li><a href="#electric" class="hover:text-white">Mercedes-EQ</a></li>
+            <li><a href="#amg" class="hover:text-white">Mercedes-AMG</a></li>
+            <li><a href="#maybach" class="hover:text-white">Mercedes-Maybach</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 data-i18n="footer.colServices" class="text-xs uppercase tracking-widest text-white font-semibold mb-3">
+            Interactive Tools</h4>
+          <ul class="space-y-2 text-xs text-zinc-400">
+            <li><button type="button" onclick="openFavoritesModal()" class="hover:text-white"
+                data-i18n="nav.favorites">Favorites</button></li>
+            <li><button type="button" onclick="openCompareModal()" class="hover:text-white"
+                data-i18n="nav.compare">Compare</button></li>
+            <li><button type="button" onclick="openTestDriveModal()" class="hover:text-white"
+                data-i18n="hero.testDriveBtn">Book Test Drive</button></li>
+            <li><button type="button" onclick="openAuthModal()" class="hover:text-white" data-i18n="nav.account">Login /
+                Register</button></li>
+          </ul>
+        </div>
+        <div>
+          <h4 data-i18n="footer.colNotice" class="text-xs uppercase tracking-widest text-white font-semibold mb-3">Demo
+            Notice</h4>
+          <p data-i18n="footer.noticeText" class="text-xs text-zinc-400 leading-relaxed">
+            Prices and specs shown are illustrative demo figures. Passwords are never saved in localStorage.
+          </p>
+        </div>
+      </div>
+      <div class="pt-6 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-zinc-500">
+        <span>© 2026 Mercedes-Benz Showcase (Interactive Demo)</span>
+        <span data-i18n="footer.bottomNote">Built with HTML, Tailwind CSS & Vanilla JS</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ========================================================= -->
+  <!-- MODALS: DETAIL, FAVORITES, COMPARE, AUTH, TEST DRIVE, BUY -->
+  <!-- ========================================================= -->
+
+  <!-- Vehicle Detail Modal -->
+  <div id="detailModal"
+    class="fixed inset-0 z-[70] hidden items-center justify-center bg-black/75 backdrop-blur-sm p-3 sm:p-6 overflow-y-auto"
+    role="dialog" aria-modal="true" aria-labelledby="detailModalTitle">
+    <div
+      class="relative w-full max-w-4xl rounded-3xl bg-white dark:bg-charcoal border border-zinc-200 dark:border-zinc-800 shadow-luxury overflow-hidden my-auto max-h-[92vh] flex flex-col">
+      <div class="flex items-center justify-between px-6 py-4 border-b border-zinc-200 dark:border-zinc-800">
+        <div>
+          <span id="detailDivisionBadge"
+            class="text-[11px] uppercase tracking-widest font-semibold text-zinc-500 dark:text-zinc-400"></span>
+          <h3 id="detailModalTitle" class="font-luxury text-xl sm:text-2xl font-bold text-zinc-900 dark:text-white">
+          </h3>
+        </div>
+        <button type="button" onclick="closeModal('detailModal')"
+          class="w-9 h-9 rounded-full bg-zinc-100 dark:bg-graphite hover:bg-zinc-200 dark:hover:bg-zinc-800 flex items-center justify-center text-zinc-700 dark:text-zinc-300"
+          aria-label="Close Detail Modal">✕</button>
+      </div>
+
+      <div class="p-6 overflow-y-auto custom-scrollbar space-y-6">
+        <!-- Main Image + Gallery Thumbnails -->
+        <div class="space-y-3">
+          <div class="rounded-2xl overflow-hidden bg-zinc-100 dark:bg-graphite h-64 sm:h-80 relative">
+            <img id="detailMainImage" src="" alt="" class="w-full h-full object-cover" />
+          </div>
+          <div id="detailThumbnails" class="flex items-center gap-2.5 overflow-x-auto pb-1"></div>
+        </div>
+
+        <!-- Price & Paint Swatches -->
+        <div
+          class="flex flex-col md:flex-row md:items-center justify-between gap-4 p-4 rounded-2xl bg-zinc-50 dark:bg-graphite border border-zinc-200 dark:border-zinc-800">
+          <div>
+            <div data-i18n="modal.demoPrice" class="text-xs uppercase tracking-wider text-zinc-500 dark:text-zinc-400">
+              Demo Price (USD)</div>
+            <div id="detailPrice" class="text-2xl sm:text-3xl font-bold text-zinc-900 dark:text-white"></div>
+          </div>
+          <div>
+            <div data-i18n="modal.paintColor"
+              class="text-xs uppercase tracking-wider text-zinc-500 dark:text-zinc-400 mb-2">Exterior Paint (Demo)</div>
+            <div id="detailColorSwatches" class="flex items-center gap-2.5"></div>
+            <div id="detailSelectedColorName" class="text-xs text-zinc-600 dark:text-zinc-300 mt-1 font-medium"></div>
+          </div>
+        </div>
+
+        <!-- Description -->
+        <p id="detailDescription" class="text-sm sm:text-base text-zinc-600 dark:text-zinc-300 leading-relaxed"></p>
+
+        <!-- Specs Grid -->
+        <div id="detailSpecsGrid" class="grid grid-cols-2 sm:grid-cols-4 gap-3"></div>
+
+        <!-- Interior & Powertrain Notes -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div class="p-4 rounded-2xl border border-zinc-200 dark:border-zinc-800">
+            <h4 data-i18n="modal.interiorTitle"
+              class="text-xs uppercase tracking-wider font-bold text-zinc-500 dark:text-zinc-400 mb-1.5">Cabin &
+              Interior</h4>
+            <p id="detailInterior" class="text-sm text-zinc-700 dark:text-zinc-300 leading-relaxed"></p>
+          </div>
+          <div class="p-4 rounded-2xl border border-zinc-200 dark:border-zinc-800">
+            <h4 data-i18n="modal.powertrainTitle"
+              class="text-xs uppercase tracking-wider font-bold text-zinc-500 dark:text-zinc-400 mb-1.5">Engine &
+              Dynamics</h4>
+            <p id="detailPowertrainNote" class="text-sm text-zinc-700 dark:text-zinc-300 leading-relaxed"></p>
+          </div>
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="flex flex-wrap items-center gap-3 pt-2">
+          <button id="detailBuyNowBtn" type="button" data-i18n="modal.buyNow"
+            class="flex-1 min-w-[150px] py-3.5 px-6 rounded-xl bg-zinc-900 dark:bg-white text-white dark:text-zinc-950 hover:bg-zinc-800 dark:hover:bg-zinc-200 font-semibold text-sm transition-colors">
+            Buy Now (Demo)
+          </button>
+          <button id="detailTestDriveBtn" type="button" data-i18n="hero.testDriveBtn"
+            class="flex-1 min-w-[150px] py-3.5 px-6 rounded-xl border border-zinc-300 dark:border-zinc-700 hover:bg-zinc-100 dark:hover:bg-graphite font-semibold text-sm text-zinc-900 dark:text-white transition-colors">
+            Book Test Drive
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Favorites Modal -->
+  <div id="favoritesModal"
+    class="fixed inset-0 z-[70] hidden items-center justify-center bg-black/75 backdrop-blur-sm p-3 sm:p-6 overflow-y-auto"
+    role="dialog" aria-modal="true">
+    <div
+      class="w-full max-w-3xl rounded-3xl bg-white dark:bg-charcoal border border-zinc-200 dark:border-zinc-800 shadow-luxury overflow-hidden max-h-[88vh] flex flex-col">
+      <div class="flex items-center justify-between px-6 py-4 border-b border-zinc-200 dark:border-zinc-800">
+        <h3 data-i18n="favorites.title" class="font-luxury text-xl font-bold text-zinc-900 dark:text-white">Saved
+          Favorites</h3>
+        <button type="button" onclick="closeModal('favoritesModal')"
+          class="w-9 h-9 rounded-full bg-zinc-100 dark:bg-graphite flex items-center justify-center">✕</button>
+      </div>
+      <div id="favoritesListContainer" class="p-6 overflow-y-auto custom-scrollbar space-y-4"></div>
+    </div>
+  </div>
+
+  <!-- Compare Modal (Up to 3 Vehicles) -->
+  <div id="compareModal"
+    class="fixed inset-0 z-[70] hidden items-center justify-center bg-black/75 backdrop-blur-sm p-3 sm:p-6 overflow-y-auto"
+    role="dialog" aria-modal="true">
+    <div
+      class="w-full max-w-5xl rounded-3xl bg-white dark:bg-charcoal border border-zinc-200 dark:border-zinc-800 shadow-luxury overflow-hidden max-h-[90vh] flex flex-col">
+      <div class="flex items-center justify-between px-6 py-4 border-b border-zinc-200 dark:border-zinc-800">
+        <h3 data-i18n="compare.title" class="font-luxury text-xl font-bold text-zinc-900 dark:text-white">Compare
+          Vehicles (Up to 3)</h3>
+        <button type="button" onclick="closeModal('compareModal')"
+          class="w-9 h-9 rounded-full bg-zinc-100 dark:bg-graphite flex items-center justify-center">✕</button>
+      </div>
+      <div id="compareContentContainer" class="p-6 overflow-x-auto overflow-y-auto custom-scrollbar"></div>
+    </div>
+  </div>
+
+  <!-- Login / Register Modal (Never stores passwords in localStorage) -->
+  <div id="authModal"
+    class="fixed inset-0 z-[70] hidden items-center justify-center bg-black/75 backdrop-blur-sm p-3 sm:p-6 overflow-y-auto"
+    role="dialog" aria-modal="true">
+    <div
+      class="w-full max-w-lg rounded-3xl bg-white dark:bg-charcoal border border-zinc-200 dark:border-zinc-800 shadow-luxury overflow-hidden">
+      <div class="flex items-center justify-between px-6 py-4 border-b border-zinc-200 dark:border-zinc-800">
+        <div class="flex gap-2">
+          <button id="tabLoginBtn" type="button" onclick="switchAuthTab('login')" data-i18n="auth.loginTab"
+            class="px-4 py-2 rounded-xl text-xs font-semibold bg-zinc-900 dark:bg-white text-white dark:text-zinc-950">Login</button>
+          <button id="tabRegisterBtn" type="button" onclick="switchAuthTab('register')" data-i18n="auth.registerTab"
+            class="px-4 py-2 rounded-xl text-xs font-semibold bg-zinc-100 dark:bg-graphite text-zinc-700 dark:text-zinc-300">Register</button>
+        </div>
+        <button type="button" onclick="closeModal('authModal')"
+          class="w-9 h-9 rounded-full bg-zinc-100 dark:bg-graphite flex items-center justify-center">✕</button>
+      </div>
+
+      <div class="p-6 space-y-4">
+        <p data-i18n="auth.securityNote"
+          class="text-xs px-3 py-2 rounded-xl bg-zinc-100 dark:bg-graphite text-zinc-600 dark:text-zinc-400">
+          Demo UI validation only. Passwords are never saved in localStorage; production authentication requires a
+          secure backend server.
+        </p>
+
+        <!-- Login Form -->
+        <form id="loginForm" class="space-y-3.5">
+          <div>
+            <label for="loginIdentifier" data-i18n="auth.emailOrPhone"
+              class="block text-xs font-semibold uppercase tracking-wider text-zinc-500 mb-1">Email or Phone</label>
+            <input id="loginIdentifier" type="text" required
+              class="w-full h-11 px-3.5 rounded-xl bg-zinc-50 dark:bg-graphite border border-zinc-300 dark:border-zinc-700 text-sm" />
+          </div>
+          <div>
+            <label for="loginPassword" data-i18n="auth.password"
+              class="block text-xs font-semibold uppercase tracking-wider text-zinc-500 mb-1">Password</label>
+            <div class="relative">
+              <input id="loginPassword" type="password" required
+                class="w-full h-11 pl-3.5 pr-12 rounded-xl bg-zinc-50 dark:bg-graphite border border-zinc-300 dark:border-zinc-700 text-sm" />
+              <button type="button" onclick="togglePasswordVisibility('loginPassword')"
+                class="absolute right-3 top-2.5 text-xs font-semibold text-zinc-500 hover:text-zinc-900 dark:hover:text-white">Show</button>
+            </div>
+          </div>
+          <p id="authErrorMsg" class="text-xs text-rose-500 font-medium hidden"></p>
+          <button type="submit" data-i18n="auth.loginSubmit"
+            class="w-full py-3 rounded-xl bg-zinc-900 dark:bg-white text-white dark:text-zinc-950 font-semibold text-sm">Sign
+            In (Demo)</button>
+        </form>
+
+        <!-- Register Form -->
+        <form id="registerForm" class="space-y-3.5 hidden">
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <div>
+              <label for="regFirstName" data-i18n="auth.firstName"
+                class="block text-xs font-semibold uppercase tracking-wider text-zinc-500 mb-1">First Name</label>
+              <input id="regFirstName" type="text" required
+                class="w-full h-11 px-3.5 rounded-xl bg-zinc-50 dark:bg-graphite border border-zinc-300 dark:border-zinc-700 text-sm" />
+            </div>
+            <div>
+              <label for="regLastName" data-i18n="auth.lastName"
+                class="block text-xs font-semibold uppercase tracking-wider text-zinc-500 mb-1">Last Name</label>
+              <input id="regLastName" type="text" required
+                class="w-full h-11 px-3.5 rounded-xl bg-zinc-50 dark:bg-graphite border border-zinc-300 dark:border-zinc-700 text-sm" />
+            </div>
+          </div>
+          <div>
+            <label for="regEmail" data-i18n="form.email"
+              class="block text-xs font-semibold uppercase tracking-wider text-zinc-500 mb-1">Email</label>
+            <input id="regEmail" type="email" required
+              class="w-full h-11 px-3.5 rounded-xl bg-zinc-50 dark:bg-graphite border border-zinc-300 dark:border-zinc-700 text-sm" />
+          </div>
+          <div>
+            <label for="regPhone" data-i18n="form.phone"
+              class="block text-xs font-semibold uppercase tracking-wider text-zinc-500 mb-1">Phone</label>
+            <input id="regPhone" type="tel" required
+              class="w-full h-11 px-3.5 rounded-xl bg-zinc-50 dark:bg-graphite border border-zinc-300 dark:border-zinc-700 text-sm" />
+          </div>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <div>
+              <label for="regPassword" data-i18n="auth.password"
+                class="block text-xs font-semibold uppercase tracking-wider text-zinc-500 mb-1">Password</label>
+              <input id="regPassword" type="password" required minlength="6"
+                class="w-full h-11 px-3.5 rounded-xl bg-zinc-50 dark:bg-graphite border border-zinc-300 dark:border-zinc-700 text-sm" />
+            </div>
+            <div>
+              <label for="regConfirmPassword" data-i18n="auth.confirmPassword"
+                class="block text-xs font-semibold uppercase tracking-wider text-zinc-500 mb-1">Confirm Password</label>
+              <input id="regConfirmPassword" type="password" required minlength="6"
+                class="w-full h-11 px-3.5 rounded-xl bg-zinc-50 dark:bg-graphite border border-zinc-300 dark:border-zinc-700 text-sm" />
+            </div>
+          </div>
+          <p id="regErrorMsg" class="text-xs text-rose-500 font-medium hidden"></p>
+          <button type="submit" data-i18n="auth.registerSubmit"
+            class="w-full py-3 rounded-xl bg-zinc-900 dark:bg-white text-white dark:text-zinc-950 font-semibold text-sm">Create
+            Demo Profile</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Test Drive Modal -->
+  <div id="testDriveModal"
+    class="fixed inset-0 z-[70] hidden items-center justify-center bg-black/75 backdrop-blur-sm p-3 sm:p-6 overflow-y-auto"
+    role="dialog" aria-modal="true">
+    <div
+      class="w-full max-w-xl rounded-3xl bg-white dark:bg-charcoal border border-zinc-200 dark:border-zinc-800 shadow-luxury overflow-hidden">
+      <div class="flex items-center justify-between px-6 py-4 border-b border-zinc-200 dark:border-zinc-800">
+        <h3 data-i18n="testDrive.title" class="font-luxury text-xl font-bold text-zinc-900 dark:text-white">Book a Test
+          Drive (Demo)</h3>
+        <button type="button" onclick="closeModal('testDriveModal')"
+          class="w-9 h-9 rounded-full bg-zinc-100 dark:bg-graphite flex items-center justify-center">✕</button>
+      </div>
+      <form id="testDriveForm" class="p-6 space-y-3.5">
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+          <div>
+            <label for="tdName" data-i18n="form.name"
+              class="block text-xs font-semibold uppercase tracking-wider text-zinc-500 mb-1">Full Name</label>
+            <input id="tdName" type="text" required
+              class="w-full h-11 px-3.5 rounded-xl bg-zinc-50 dark:bg-graphite border border-zinc-300 dark:border-zinc-700 text-sm" />
+          </div>
+          <div>
+            <label for="tdPhone" data-i18n="form.phone"
+              class="block text-xs font-semibold uppercase tracking-wider text-zinc-500 mb-1">Phone</label>
+            <input id="tdPhone" type="tel" required
+              class="w-full h-11 px-3.5 rounded-xl bg-zinc-50 dark:bg-graphite border border-zinc-300 dark:border-zinc-700 text-sm" />
+          </div>
+        </div>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+          <div>
+            <label for="tdEmail" data-i18n="form.email"
+              class="block text-xs font-semibold uppercase tracking-wider text-zinc-500 mb-1">Email</label>
+            <input id="tdEmail" type="email" required
+              class="w-full h-11 px-3.5 rounded-xl bg-zinc-50 dark:bg-graphite border border-zinc-300 dark:border-zinc-700 text-sm" />
+          </div>
+          <div>
+            <label for="tdModelSelect" data-i18n="form.model"
+              class="block text-xs font-semibold uppercase tracking-wider text-zinc-500 mb-1">Model</label>
+            <select id="tdModelSelect"
+              class="w-full h-11 px-3.5 rounded-xl bg-zinc-50 dark:bg-graphite border border-zinc-300 dark:border-zinc-700 text-sm"></select>
+          </div>
+        </div>
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-3.5">
+          <div>
+            <label for="tdDate" data-i18n="testDrive.date"
+              class="block text-xs font-semibold uppercase tracking-wider text-zinc-500 mb-1">Date</label>
+            <input id="tdDate" type="date" required
+              class="w-full h-11 px-3 rounded-xl bg-zinc-50 dark:bg-graphite border border-zinc-300 dark:border-zinc-700 text-sm" />
+          </div>
+          <div>
+            <label for="tdTime" data-i18n="testDrive.time"
+              class="block text-xs font-semibold uppercase tracking-wider text-zinc-500 mb-1">Time</label>
+            <input id="tdTime" type="time" required value="11:00"
+              class="w-full h-11 px-3 rounded-xl bg-zinc-50 dark:bg-graphite border border-zinc-300 dark:border-zinc-700 text-sm" />
+          </div>
+          <div>
+            <label for="tdCity" data-i18n="form.city"
+              class="block text-xs font-semibold uppercase tracking-wider text-zinc-500 mb-1">City</label>
+            <input id="tdCity" type="text" required placeholder="Tashkent"
+              class="w-full h-11 px-3 rounded-xl bg-zinc-50 dark:bg-graphite border border-zinc-300 dark:border-zinc-700 text-sm" />
+          </div>
+        </div>
+        <div>
+          <label for="tdNotes" data-i18n="form.notes"
+            class="block text-xs font-semibold uppercase tracking-wider text-zinc-500 mb-1">Notes</label>
+          <textarea id="tdNotes" rows="2"
+            class="w-full p-3 rounded-xl bg-zinc-50 dark:bg-graphite border border-zinc-300 dark:border-zinc-700 text-sm"></textarea>
+        </div>
+        <button type="submit" data-i18n="testDrive.submit"
+          class="w-full py-3.5 rounded-xl bg-zinc-900 dark:bg-white text-white dark:text-zinc-950 font-semibold text-sm">Confirm
+          Test Drive Request</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Buy Now Order Modal -->
+  <div id="buyNowModal"
+    class="fixed inset-0 z-[70] hidden items-center justify-center bg-black/75 backdrop-blur-sm p-3 sm:p-6 overflow-y-auto"
+    role="dialog" aria-modal="true">
+    <div
+      class="w-full max-w-xl rounded-3xl bg-white dark:bg-charcoal border border-zinc-200 dark:border-zinc-800 shadow-luxury overflow-hidden">
+      <div class="flex items-center justify-between px-6 py-4 border-b border-zinc-200 dark:border-zinc-800">
+        <h3 data-i18n="buyNow.title" class="font-luxury text-xl font-bold text-zinc-900 dark:text-white">Vehicle Order
+          Request (Demo)</h3>
+        <button type="button" onclick="closeModal('buyNowModal')"
+          class="w-9 h-9 rounded-full bg-zinc-100 dark:bg-graphite flex items-center justify-center">✕</button>
+      </div>
+      <form id="buyNowForm" class="p-6 space-y-3.5">
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+          <div>
+            <label for="buyName" data-i18n="form.name"
+              class="block text-xs font-semibold uppercase tracking-wider text-zinc-500 mb-1">Full Name</label>
+            <input id="buyName" type="text" required
+              class="w-full h-11 px-3.5 rounded-xl bg-zinc-50 dark:bg-graphite border border-zinc-300 dark:border-zinc-700 text-sm" />
+          </div>
+          <div>
+            <label for="buyPhone" data-i18n="form.phone"
+              class="block text-xs font-semibold uppercase tracking-wider text-zinc-500 mb-1">Phone</label>
+            <input id="buyPhone" type="tel" required
+              class="w-full h-11 px-3.5 rounded-xl bg-zinc-50 dark:bg-graphite border border-zinc-300 dark:border-zinc-700 text-sm" />
+          </div>
+        </div>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+          <div>
+            <label for="buyEmail" data-i18n="form.email"
+              class="block text-xs font-semibold uppercase tracking-wider text-zinc-500 mb-1">Email</label>
+            <input id="buyEmail" type="email" required
+              class="w-full h-11 px-3.5 rounded-xl bg-zinc-50 dark:bg-graphite border border-zinc-300 dark:border-zinc-700 text-sm" />
+          </div>
+          <div>
+            <label for="buyModel" data-i18n="form.model"
+              class="block text-xs font-semibold uppercase tracking-wider text-zinc-500 mb-1">Selected Model</label>
+            <input id="buyModel" type="text" readonly
+              class="w-full h-11 px-3.5 rounded-xl bg-zinc-100 dark:bg-zinc-800 border border-zinc-300 dark:border-zinc-700 text-sm font-semibold" />
+          </div>
+        </div>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+          <div>
+            <label for="buyColor" data-i18n="modal.paintColor"
+              class="block text-xs font-semibold uppercase tracking-wider text-zinc-500 mb-1">Selected Color</label>
+            <input id="buyColor" type="text" required
+              class="w-full h-11 px-3.5 rounded-xl bg-zinc-50 dark:bg-graphite border border-zinc-300 dark:border-zinc-700 text-sm" />
+          </div>
+          <div>
+            <label for="buyCity" data-i18n="form.city"
+              class="block text-xs font-semibold uppercase tracking-wider text-zinc-500 mb-1">City</label>
+            <input id="buyCity" type="text" required
+              class="w-full h-11 px-3.5 rounded-xl bg-zinc-50 dark:bg-graphite border border-zinc-300 dark:border-zinc-700 text-sm" />
+          </div>
+        </div>
+        <div>
+          <label for="buyNotes" data-i18n="form.notes"
+            class="block text-xs font-semibold uppercase tracking-wider text-zinc-500 mb-1">Additional Notes</label>
+          <textarea id="buyNotes" rows="2"
+            class="w-full p-3 rounded-xl bg-zinc-50 dark:bg-graphite border border-zinc-300 dark:border-zinc-700 text-sm"></textarea>
+        </div>
+        <button type="submit" data-i18n="buyNow.submit"
+          class="w-full py-3.5 rounded-xl bg-zinc-900 dark:bg-white text-white dark:text-zinc-950 font-semibold text-sm">Submit
+          Demo Order</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- ========================================================= -->
+  <!-- JAVASCRIPT: TRANSLATIONS, 30 DEMO MODELS, STATE & UI LOGIC -->
+  <!-- ========================================================= -->
+  <script>
+    const STORAGE_KEYS = {
+      LANG: 'mb_demo_lang_v1',
+      THEME: 'mb_demo_theme_v1',
+      FAVORITES: 'mb_demo_favorites_v1',
+      COMPARE: 'mb_demo_compare_v1',
+      PROFILE: 'mb_demo_profile_v1',
+    };
+
+    const TRANSLATIONS = {
+      uz: {
+        brandSubtitle: 'Demo Ko‘rgazma',
+        nav: {
+          home: 'Asosiy',
+          models: 'Modellar',
+          electric: 'Elektromobil',
+          amg: 'AMG',
+          maybach: 'Maybach',
+          about: 'Biz haqimizda',
+          contact: 'Aloqa',
+          favorites: 'Sevimlilar',
+          compare: 'Taqqoslash',
+          account: 'Kirish / Ro‘yxat',
+        },
+        langLabel: 'Tilni tanlash',
+        hero: {
+          badge: 'Demo Ko‘rgazma • Namuna Narx va Xususiyatlar',
+          title: 'Hashamat va Muhandislik Aniqligi Cho‘qqisi',
+          subtitle: '30 ta namuna Mercedes-Benz, Mercedes-AMG, Mercedes-Maybach va EQ elektromobil modellarini interaktiv ko‘rgazmada ko‘ring.',
+          exploreBtn: 'Modellarni ko‘rish',
+          testDriveBtn: 'Test Drive buyurtma',
+          statModels: 'Demo Avtomobil Modellari',
+          statLanguages: 'Tillar (UZ / EN / RU)',
+          statDivisions: 'Maxsus Yo‘nalishlar',
+        },
+        disclaimer: 'Eslatma: Ushbu sahifadagi barcha narxlar, texnik ma’lumotlar va ko‘rsatkichlar namuna (demo) ma’lumotlar hisoblanadi.',
+        catalog: {
+          eyebrow: 'To‘liq Ro‘yxat',
+          title: 'Mercedes-Benz Modellari (30 ta Demo Avtomobil)',
+          showing: 'Ko‘rsatilmoqda',
+          ofModels: 'ta demo modeldan',
+          noResults: 'Tanlangan filtrlar bo‘yicha avtomobil topilmadi.',
+        },
+        filter: {
+          searchLabel: 'Model yoki kalit so‘z bo‘yicha qidirish',
+          categoryLabel: 'Kuzov va Yo‘nalish',
+          all: 'Barcha bo‘limlar',
+          sedan: 'Sedan / Kupe',
+          suv: 'SUV / Yo‘ltanlamas',
+          electric: 'Elektromobil (EQ)',
+          amg: 'Mercedes-AMG',
+          maybach: 'Mercedes-Maybach',
+          van: 'Mikroavtobus / Van',
+          fuelLabel: 'Dvigatel turi',
+          fuelAll: 'Barchasi',
+          petrol: 'Benzin / Gibrid',
+          electricOnly: 'Elektr',
+          diesel: 'Dizel',
+          sortLabel: 'Saralash',
+          maxPriceLabel: 'Maksimal Demo Narx (USD)',
+          resetBtn: 'Filtrlarni tozalash',
+        },
+        sort: {
+          featured: 'Standart tartib',
+          priceAsc: 'Demo narx: Arzondan qimmmatga',
+          priceDesc: 'Demo narx: Qimmatdan arzonga',
+          hpDesc: 'Ot kuchi: Yuqoridan pastga',
+        },
+        card: {
+          demoBadge: 'DEMO',
+          year: 'Yil',
+          engine: 'Motor',
+          hp: 'Ot kuchi',
+          topSpeed: 'Maks. tezlik',
+          accel: '0–100 km/s',
+          detailsBtn: 'Batafsil',
+          compareAdd: 'Taqqoslash',
+          compareAdded: 'Qo‘shildi',
+        },
+        divisions: {
+          popularEyebrow: 'Mashhur Tanlov',
+          popularTitle: 'Yangi va Ommabop Modellar',
+          eqEyebrow: 'Zamonaviy Elektr Harakati',
+          eqTitle: 'Mercedes-EQ Elektr Qatori',
+          viewAllEq: 'Barcha EQ modellar',
+          amgEyebrow: 'Yuqori Dinamika',
+          amgTitle: 'Mercedes-AMG Sport Qatori',
+          viewAllAmg: 'Barcha AMG modellar',
+          maybachEyebrow: 'Oliy Darajadagi Komfort',
+          maybachTitle: 'Mercedes-Maybach Kolleksiyasi',
+          viewAllMaybach: 'Barcha Maybach modellar',
+        },
+        about: {
+          eyebrow: 'Tarix va Vizyon',
+          title: 'Mercedes-Benz Haqida',
+          p1: 'Mercedes-Benz dizayn nafisligi, xavfsizlik texnologiyalari va yuqori sifatli salon materiallarini sedanlar, SUVlar, elektromobillar, AMG va Maybach liniyalarida uyg‘unlashtiradi.',
+          p2: 'Ushbu interaktiv demo sahifada 30 ta avtomobil modeli, rang tanlash, taqqoslash jadvali, sevimlilar ro‘yxati, test drive va buyurtma formalari ishlaydi.',
+        },
+        tech: {
+          title: 'Innovatsiya va Texnologiyalar',
+          mbuxTitle: 'MBUX Intellektual Interfeys',
+          mbuxDesc: 'Keng ekranli boshqaruv, moslashuvchan salon yoritilishi va haydovchi sozlamalari.',
+          eqTitle: 'Elektr Harakat Tizimi',
+          eqDesc: 'Sokin yurish, aqlli rekuperatsiya va aerodinamik samaradorlik.',
+          safeTitle: 'Xavfsizlik va Yordamchi Tizimlar',
+          safeDesc: 'Ko‘p sensorli haydovchi yordamchilari va yuqori aniqlikdagi yoritish tizimlari.',
+        },
+        reviews: {
+          title: 'Mijozlar Fikrlari (Demo)',
+          r1: '“S-Class, EQE va AMG modellarini yonma-yon taqqoslash juda qulay va tushunarli.”',
+          r2: '“Qora va kumush uslub, tilni tez almashtirish va test drive formasi a’lo ishlaydi.”',
+          r3: '“Maybach va G-Class batafsil oynasida ranglar va texnik ko‘rsatkichlar aniq ko‘rinadi.”',
+        },
+        faq: {
+          title: 'Ko‘p Beriladigan Savollar',
+          items: [
+            {
+              q: 'Saytdagi narxlar va texnik ma’lumotlar rasmiymi?',
+              a: 'Yo‘q, barcha narxlar va ko‘rsatkichlar interaktiv ko‘rgazma uchun namuna (demo) ma’lumotlar sifatida berilgan.',
+            },
+            {
+              q: 'Nechta avtomobilni bir vaqtda taqqoslash mumkin?',
+              a: 'Bir vaqtning o‘zida 3 tagacha avtomobilni narxi, motori, ot kuchi, maksimal tezligi, 0–100 km/s tezlashuvi, kuzovi va yoqilg‘i turi bo‘yicha taqqoslashingiz mumkin.',
+            },
+            {
+              q: 'Parollar localStorage’da saqlanadimi?',
+              a: 'Yo‘q. Xavfsizlik talablariga ko‘ra parollar localStorage’da saqlanmaydi; haqiqiy tizim uchun backend server talab qilinadi.',
+            },
+          ],
+        },
+        contact: {
+          eyebrow: 'Aloqa Markazi',
+          title: 'Biz Bilan Bog‘laning',
+          studioTitle: 'Ko‘rgazma Studiyasi (Demo)',
+        },
+        form: {
+          name: 'Ism va familiya',
+          email: 'Elektron pochta',
+          phone: 'Telefon raqami',
+          message: 'Xabar matni',
+          sendMessage: 'Xabar yuborish',
+          model: 'Avtomobil modeli',
+          city: 'Shahar',
+          notes: 'Qo‘shimcha izoh',
+        },
+        modal: {
+          demoPrice: 'Demo Narx (USD)',
+          paintColor: 'Kuzov rangi (Demo)',
+          interiorTitle: 'Ichki Salon',
+          powertrainTitle: 'Dvigatel va Dinamika',
+          buyNow: 'Buyurtma berish (Demo)',
+        },
+        favorites: {
+          title: 'Sevimli Avtomobillar',
+          empty: 'Hozircha sevimli avtomobillar qo‘shilmagan.',
+          remove: 'O‘chirish',
+        },
+        compare: {
+          title: 'Avtomobillarni Taqqoslash (3 tagacha)',
+          empty: 'Taqqoslash uchun kamida 1 ta avtomobil tanlang.',
+          spec: 'Ko‘rsatkich',
+          price: 'Demo Narx',
+          engine: 'Motor',
+          hp: 'Ot kuchi',
+          topSpeed: 'Maksimal tezlik',
+          accel: '0–100 km/s',
+          body: 'Kuzov turi',
+          fuel: 'Yoqilg‘i turi',
+          clearAll: 'Ro‘yxatni tozalash',
+        },
+        auth: {
+          loginTab: 'Kirish',
+          registerTab: 'Ro‘yxatdan o‘tish',
+          securityNote: 'Faqat demo UI tekshiruvi. Parollar localStorage’da saqlanmaydi; haqiqiy autentifikatsiya uchun backend kerak.',
+          emailOrPhone: 'Email yoki telefon',
+          password: 'Parol',
+          confirmPassword: 'Parolni tasdiqlash',
+          firstName: 'Ism',
+          lastName: 'Familiya',
+          loginSubmit: 'Kirish (Demo)',
+          registerSubmit: 'Demo profil yaratish',
+          passwordMismatch: 'Parollar bir xil emas!',
+          shortPassword: 'Parol kamida 6 belgidan iborat bo‘lishi kerak.',
+          welcomeDemo: 'Demo sessiya faollashtirildi',
+        },
+        testDrive: {
+          title: 'Test Drive Buyurtma Qilish (Demo)',
+          date: 'Sana',
+          time: 'Vaqt',
+          submit: 'Test Drive so‘rovini yuborish',
+          success: 'Test Drive so‘rovi muvaffaqiyatli yuborildi (Demo).',
+        },
+        buyNow: {
+          title: 'Avtomobilga Buyurtma Berish (Demo)',
+          submit: 'Demo buyurtmani yuborish',
+          success: 'Buyurtma so‘rovi qabul qilindi (Demo). Haqiqiy buyurtmalar uchun backend API ulanadi.',
+        },
+        footer: {
+          desc: 'Zamonaviy avtomobil ko‘rgazmasi interfeysi (demo ma’lumotlar asosida).',
+          colModels: 'Modellar',
+          colServices: 'Interaktiv Vositalar',
+          colNotice: 'Demo Eslatma',
+          noticeText: 'Narx va texnik ma’lumotlar namuna sifatida keltirilgan.',
+          bottomNote: 'HTML, Tailwind CSS va Vanilla JS yordamida yaratilgan',
+        },
+        toast: {
+          favAdded: 'Sevimlilarga qo‘shildi',
+          favRemoved: 'Sevimlilardan o‘chirildi',
+          compareAdded: 'Taqqoslashga qo‘shildi',
+          compareLimit: 'Bir vaqtda maksimal 3 ta avtomobilni taqqoslash mumkin.',
+          compareRemoved: 'Taqqoslashdan olib tashlandi',
+          contactSent: 'Xabaringiz yuborildi (Demo).',
+        },
+      },
+      en: {
+        brandSubtitle: 'Demo Showcase',
+        nav: {
+          home: 'Home',
+          models: 'Models',
+          electric: 'Electric',
+          amg: 'AMG',
+          maybach: 'Maybach',
+          about: 'About Us',
+          contact: 'Contact',
+          favorites: 'Favorites',
+          compare: 'Compare',
+          account: 'Login / Register',
+        },
+        langLabel: 'Select Language',
+        hero: {
+          badge: 'Demo Showcase • Illustrative Pricing & Specs',
+          title: 'The Pinnacle of Luxury & Precision Engineering',
+          subtitle: 'Explore 30 curated Mercedes-Benz, Mercedes-AMG, Mercedes-Maybach, and all-electric models in an interactive luxury showroom experience.',
+          exploreBtn: 'Explore Models',
+          testDriveBtn: 'Book Test Drive',
+          statModels: 'Demo Vehicle Models',
+          statLanguages: 'Languages (UZ / EN / RU)',
+          statDivisions: 'Signature Divisions',
+        },
+        disclaimer: 'Notice: All vehicle prices, specifications, and availability figures in this showcase are demo / illustrative data for interactive preview purposes.',
+        catalog: {
+          eyebrow: 'Complete Lineup',
+          title: 'Mercedes-Benz Models (30 Demo Vehicles)',
+          showing: 'Showing',
+          ofModels: 'of 30 demo models',
+          noResults: 'No vehicles matched your current filter criteria.',
+        },
+        filter: {
+          searchLabel: 'Search Model or Keyword',
+          categoryLabel: 'Category & Division',
+          all: 'All Categories',
+          sedan: 'Sedan / Coupe',
+          suv: 'SUV / Off-Road',
+          electric: 'Electric (EQ)',
+          amg: 'Mercedes-AMG',
+          maybach: 'Mercedes-Maybach',
+          van: 'Van & Commercial',
+          fuelLabel: 'Powertrain',
+          fuelAll: 'All Powertrains',
+          petrol: 'Petrol / Hybrid',
+          electricOnly: 'Electric',
+          diesel: 'Diesel',
+          sortLabel: 'Sort By',
+          maxPriceLabel: 'Max Demo Price (USD)',
+          resetBtn: 'Reset Filters',
+        },
+        sort: {
+          featured: 'Featured Order',
+          priceAsc: 'Demo Price: Low to High',
+          priceDesc: 'Demo Price: High to Low',
+          hpDesc: 'Horsepower: High to Low',
+        },
+        card: {
+          demoBadge: 'DEMO',
+          year: 'Year',
+          engine: 'Engine',
+          hp: 'Horsepower',
+          topSpeed: 'Top Speed',
+          accel: '0–100 km/h',
+          detailsBtn: 'Details',
+          compareAdd: 'Compare',
+          compareAdded: 'Added',
+        },
+        divisions: {
+          popularEyebrow: 'Highlights',
+          popularTitle: 'New & Popular Models',
+          eqEyebrow: 'Progressive Luxury',
+          eqTitle: 'Mercedes-EQ Electric Lineup',
+          viewAllEq: 'Filter All Electric',
+          amgEyebrow: 'Driving Performance',
+          amgTitle: 'Mercedes-AMG Performance',
+          viewAllAmg: 'Filter All AMG',
+          maybachEyebrow: 'Ultimate Chauffeur Luxury',
+          maybachTitle: 'Mercedes-Maybach Atelier',
+          viewAllMaybach: 'Filter All Maybach',
+        },
+        about: {
+          eyebrow: 'Heritage & Vision',
+          title: 'About Mercedes-Benz',
+          p1: 'Mercedes-Benz blends sculptural design, safety leadership, and refined craftsmanship across sedans, SUVs, electric vehicles, AMG performance machines, and Maybach flagship lounges.',
+          p2: 'This interactive demo portal presents 30 representative models with customizable configurations, side-by-side comparison, favorites storage, test drive scheduling, and order request workflows.',
+        },
+        tech: {
+          title: 'Innovation & Technology Highlights',
+          mbuxTitle: 'MBUX Hyperscreen Experience',
+          mbuxDesc: 'Intuitive panoramic displays, adaptive ambient lighting, and personalized driver profiles.',
+          eqTitle: 'Electric Drive Architecture',
+          eqDesc: 'Whisper-quiet electric powertrains, intelligent energy recuperation, and aerodynamic poise.',
+          safeTitle: 'Intelligent Assistance Systems',
+          safeDesc: 'Multi-sensor driver assistance, digital light illumination, and acoustic comfort suites.',
+        },
+        reviews: {
+          title: 'Client Impressions (Demo)',
+          r1: '“Comparing the S-Class, EQE, and AMG models side-by-side made exploring the lineup effortless and clear.”',
+          r2: '“Clean silver and obsidian styling, instant language switching, and quick test drive booking flow.”',
+          r3: '“The Maybach and G-Class detail views give a great sense of exterior shades, cabin comfort, and performance specs.”',
+        },
+        faq: {
+          title: 'Frequently Asked Questions',
+          items: [
+            {
+              q: 'Are the prices and specifications shown official factory figures?',
+              a: 'No. All prices and specifications in this application are illustrative demo data created for interactive showcase purposes.',
+            },
+            {
+              q: 'How many vehicles can be compared at once?',
+              a: 'You can compare up to 3 vehicles simultaneously across demo price, engine, horsepower, top speed, 0–100 km/h acceleration, body style, and fuel type.',
+            },
+            {
+              q: 'Are passwords stored in localStorage?',
+              a: 'No. Passwords are never saved in localStorage; real production authentication requires a dedicated backend service.',
+            },
+          ],
+        },
+        contact: {
+          eyebrow: 'Concierge & Studio',
+          title: 'Contact Us',
+          studioTitle: 'Flagship Showcase Studio (Demo)',
+        },
+        form: {
+          name: 'Full Name',
+          email: 'Email Address',
+          phone: 'Phone Number',
+          message: 'Message',
+          sendMessage: 'Send Inquiry',
+          model: 'Vehicle Model',
+          city: 'City',
+          notes: 'Additional Notes',
+        },
+        modal: {
+          demoPrice: 'Demo Price (USD)',
+          paintColor: 'Exterior Paint (Demo)',
+          interiorTitle: 'Cabin & Interior',
+          powertrainTitle: 'Engine & Dynamics',
+          buyNow: 'Buy Now (Demo)',
+        },
+        favorites: {
+          title: 'Saved Favorites',
+          empty: 'No vehicles added to favorites yet.',
+          remove: 'Remove',
+        },
+        compare: {
+          title: 'Compare Vehicles (Up to 3)',
+          empty: 'Select at least 1 vehicle to view the comparison table.',
+          spec: 'Specification',
+          price: 'Demo Price',
+          engine: 'Engine',
+          hp: 'Horsepower',
+          topSpeed: 'Top Speed',
+          accel: '0–100 km/h',
+          body: 'Body Type',
+          fuel: 'Fuel Type',
+          clearAll: 'Clear All',
+        },
+        auth: {
+          loginTab: 'Login',
+          registerTab: 'Register',
+          securityNote: 'Demo UI validation only. Passwords are never saved in localStorage; production authentication requires a secure backend server.',
+          emailOrPhone: 'Email or Phone',
+          password: 'Password',
+          confirmPassword: 'Confirm Password',
+          firstName: 'First Name',
+          lastName: 'Last Name',
+          loginSubmit: 'Sign In (Demo)',
+          registerSubmit: 'Create Demo Profile',
+          passwordMismatch: 'Passwords do not match!',
+          shortPassword: 'Password must be at least 6 characters long.',
+          welcomeDemo: 'Demo profile session activated',
+        },
+        testDrive: {
+          title: 'Book a Test Drive (Demo)',
+          date: 'Date',
+          time: 'Time',
+          submit: 'Confirm Test Drive Request',
+          success: 'Test drive request submitted (Demo).',
+        },
+        buyNow: {
+          title: 'Vehicle Order Request (Demo)',
+          submit: 'Submit Demo Order',
+          success: 'Order inquiry recorded (Demo). Connect a backend API to process live orders.',
+        },
+        footer: {
+          desc: 'Interactive automotive showcase demonstrating luxury UI, multi-language support, filtering, and comparison with demo data.',
+          colModels: 'Lineup',
+          colServices: 'Interactive Tools',
+          colNotice: 'Demo Notice',
+          noticeText: 'Prices and specs shown are illustrative demo figures.',
+          bottomNote: 'Built with HTML, Tailwind CSS & Vanilla JS',
+        },
+        toast: {
+          favAdded: 'Added to Favorites',
+          favRemoved: 'Removed from Favorites',
+          compareAdded: 'Added to Compare',
+          compareLimit: 'You can compare up to 3 vehicles at once.',
+          compareRemoved: 'Removed from Compare',
+          contactSent: 'Inquiry sent (Demo).',
+        },
+      },
+      ru: {
+        brandSubtitle: 'Демо Витрина',
+        nav: {
+          home: 'Главная',
+          models: 'Модели',
+          electric: 'Электро',
+          amg: 'AMG',
+          maybach: 'Maybach',
+          about: 'О нас',
+          contact: 'Контакты',
+          favorites: 'Избранное',
+          compare: 'Сравнение',
+          account: 'Вход / Регистрация',
+        },
+        langLabel: 'Выбор языка',
+        hero: {
+          badge: 'Демо Витрина • Ориентировочные данные',
+          title: 'Вершина Роскоши и Инженерной Точности',
+          subtitle: 'Изучите 30 моделей Mercedes-Benz, Mercedes-AMG, Mercedes-Maybach и линейки EQ в интерактивном шоуруме.',
+          exploreBtn: 'Смотреть модели',
+          testDriveBtn: 'Запись на тест-драйв',
+          statModels: 'Демо Моделей Авто',
+          statLanguages: 'Языки (UZ / EN / RU)',
+          statDivisions: 'Особые Линейки',
+        },
+        disclaimer: 'Примечание: Все цены, характеристики и данные на этой странице носят демонстрационный характер.',
+        catalog: {
+          eyebrow: 'Полный Ряд',
+          title: 'Модели Mercedes-Benz (30 Демо Авто)',
+          showing: 'Показано',
+          ofModels: 'из 30 демо моделей',
+          noResults: 'По заданным фильтрам автомобили не найдены.',
+        },
+        filter: {
+          searchLabel: 'Поиск модели или ключевого слова',
+          categoryLabel: 'Кузов и Линейка',
+          all: 'Все категории',
+          sedan: 'Седан / Купе',
+          suv: 'SUV / Внедорожник',
+          electric: 'Электро (EQ)',
+          amg: 'Mercedes-AMG',
+          maybach: 'Mercedes-Maybach',
+          van: 'Минивэн / Фургон',
+          fuelLabel: 'Силовая установка',
+          fuelAll: 'Все типы',
+          petrol: 'Бензин / Гибрид',
+          electricOnly: 'Электро',
+          diesel: 'Дизель',
+          sortLabel: 'Сортировка',
+          maxPriceLabel: 'Макс. демо цена (USD)',
+          resetBtn: 'Сбросить фильтры',
+        },
+        sort: {
+          featured: 'По умолчанию',
+          priceAsc: 'Демо цена: по возрастанию',
+          priceDesc: 'Демо цена: по убыванию',
+          hpDesc: 'Мощность: по убыванию',
+        },
+        card: {
+          demoBadge: 'ДЕМО',
+          year: 'Год',
+          engine: 'Мотор',
+          hp: 'Мощность',
+          topSpeed: 'Макс. скорость',
+          accel: '0–100 км/ч',
+          detailsBtn: 'Подробнее',
+          compareAdd: 'Сравнить',
+          compareAdded: 'Добавлено',
+        },
+        divisions: {
+          popularEyebrow: 'Популярное',
+          popularTitle: 'Новые и Популярные Модели',
+          eqEyebrow: 'Электрическая Эра',
+          eqTitle: 'Линейка Mercedes-EQ',
+          viewAllEq: 'Все электромодели',
+          amgEyebrow: 'Спортивный Характер',
+          amgTitle: 'Mercedes-AMG Performance',
+          viewAllAmg: 'Все модели AMG',
+          maybachEyebrow: 'Высший Комфорт',
+          maybachTitle: 'Mercedes-Maybach Atelier',
+          viewAllMaybach: 'Все модели Maybach',
+        },
+        about: {
+          eyebrow: 'Наследие и Видение',
+          title: 'О Mercedes-Benz',
+          p1: 'Mercedes-Benz сочетает выразительный дизайн, высокие стандарты безопасности и премиальную отделку салона в седанах, кроссоверах, электромобилях, AMG и Maybach.',
+          p2: 'В этой демо-версии доступны 30 моделей, выбор цвета, сравнение до 3 авто, избранное, запись на тест-драйв и заявка на заказ.',
+        },
+        tech: {
+          title: 'Инновации и Технологии',
+          mbuxTitle: 'Интерфейс MBUX',
+          mbuxDesc: 'Панорамные дисплеи, адаптивная подсветка салона и персональные профили.',
+          eqTitle: 'Электрический Привод',
+          eqDesc: 'Тихий ход, интеллектуальная рекуперация и продуманная аэродинамика.',
+          safeTitle: 'Интеллектуальная Безопасность',
+          safeDesc: 'Системы помощи водителю и адаптивное освещение дороги.',
+        },
+        reviews: {
+          title: 'Отзывы Клиентов (Демо)',
+          r1: '“Сравнивать S-Class, EQE и AMG рядом очень удобно и наглядно.”',
+          r2: '“Стильное оформление, быстрая смена языка и удобная форма тест-драйва.”',
+          r3: '“В карточке деталей Maybach и G-Class удобно смотреть оттенки и характеристики.”',
+        },
+        faq: {
+          title: 'Частые Вопросы',
+          items: [
+            {
+              q: 'Являются ли цены и характеристики официальными?',
+              a: 'Нет. Все цены и характеристики приведены в качестве демонстрационных данных.',
+            },
+            {
+              q: 'Сколько автомобилей можно сравнить одновременно?',
+              a: 'До 3 автомобилей одновременно по цене, мотору, мощности, скорости, разгону 0–100 км/ч, кузову и типу топлива.',
+            },
+            {
+              q: 'Сохраняются ли пароли в localStorage?',
+              a: 'Нет. Пароли никогда не сохраняются в localStorage; для реальной авторизации требуется серверная часть.',
+            },
+          ],
+        },
+        contact: {
+          eyebrow: 'Связь и Студия',
+          title: 'Контакты',
+          studioTitle: 'Демо-Студия Шоурума',
+        },
+        form: {
+          name: 'Имя и фамилия',
+          email: 'Электронная почта',
+          phone: 'Телефон',
+          message: 'Сообщение',
+          sendMessage: 'Отправить',
+          model: 'Модель автомобиля',
+          city: 'Город',
+          notes: 'Комментарий',
+        },
+        modal: {
+          demoPrice: 'Демо Цена (USD)',
+          paintColor: 'Цвет кузова (Демо)',
+          interiorTitle: 'Интерьер и Салон',
+          powertrainTitle: 'Двигатель и Динамика',
+          buyNow: 'Заказать (Демо)',
+        },
+        favorites: {
+          title: 'Избранные Модели',
+          empty: 'Список избранного пока пуст.',
+          remove: 'Удалить',
+        },
+        compare: {
+          title: 'Сравнение Моделей (до 3)',
+          empty: 'Выберите хотя бы 1 автомобиль для сравнения.',
+          spec: 'Параметр',
+          price: 'Демо Цена',
+          engine: 'Мотор',
+          hp: 'Мощность',
+          topSpeed: 'Макс. скорость',
+          accel: '0–100 км/ч',
+          body: 'Кузов',
+          fuel: 'Топливо',
+          clearAll: 'Очистить',
+        },
+        auth: {
+          loginTab: 'Вход',
+          registerTab: 'Регистрация',
+          securityNote: 'Демо-проверка формы. Пароли не сохраняются в localStorage; для продакшена нужен backend.',
+          emailOrPhone: 'Email или телефон',
+          password: 'Пароль',
+          confirmPassword: 'Подтвердите пароль',
+          firstName: 'Имя',
+          lastName: 'Фамилия',
+          loginSubmit: 'Войти (Демо)',
+          registerSubmit: 'Создать демо-профиль',
+          passwordMismatch: 'Пароли не совпадают!',
+          shortPassword: 'Пароль должен быть не короче 6 символов.',
+          welcomeDemo: 'Демо-сессия активирована',
+        },
+        testDrive: {
+          title: 'Запись на Тест-Драйв (Демо)',
+          date: 'Дата',
+          time: 'Время',
+          submit: 'Отправить заявку',
+          success: 'Заявка на тест-драйв отправлена (Демо).',
+        },
+        buyNow: {
+          title: 'Заявка на Заказ Авто (Демо)',
+          submit: 'Отправить демо-заявку',
+          success: 'Заявка оформлена (Демо). Для реальных заказов подключается backend API.',
+        },
+        footer: {
+          desc: 'Интерактивная витрина автомобилей в премиальном стиле с демо-данными.',
+          colModels: 'Модели',
+          colServices: 'Инструменты',
+          colNotice: 'Уведомление',
+          noticeText: 'Цены и характеристики указаны для демонстрации.',
+          bottomNote: 'Создано на HTML, Tailwind CSS и Vanilla JS',
+        },
+        toast: {
+          favAdded: 'Добавлено в избранное',
+          favRemoved: 'Удалено из избранного',
+          compareAdded: 'Добавлено к сравнению',
+          compareLimit: 'Одновременно можно сравнить до 3 автомобилей.',
+          compareRemoved: 'Удалено из сравнения',
+          contactSent: 'Сообщение отправлено (Демо).',
+        },
+      },
+    };
+
+    const HERO_SLIDES = [
+      {
+        image: 'https://images.unsplash.com/photo-1618843479313-40f8afb4b4d8?auto=format&fit=crop&w=1920&q=85',
+        titles: {
+          uz: 'Hashamat va Muhandislik Aniqligi Cho‘qqisi',
+          en: 'The Pinnacle of Luxury & Precision Engineering',
+          ru: 'Вершина Роскоши и Инженерной Точности',
+        },
+      },
+      {
+        image: 'https://images.unsplash.com/photo-1617531653520-bd466ee81600?auto=format&fit=crop&w=1920&q=85',
+        titles: {
+          uz: 'AMG va Maybach Bilan Unutilmas Harakat',
+          en: 'Unmistakable Presence Across AMG & Maybach',
+          ru: 'Безупречный Характер AMG и Maybach',
+        },
+      },
+      {
+        image: 'https://images.unsplash.com/photo-1606664515524-ed2f786a0bd6?auto=format&fit=crop&w=1920&q=85',
+        titles: {
+          uz: 'Sokin Quvvat va Kelajak Elektr Texnologiyasi',
+          en: 'Silent Power & Progressive Electric Mobility',
+          ru: 'Тихая Мощь и Электромобильность Будущего',
+        },
+      },
+    ];
+
+    const PAINT_OPTIONS = [
+      { name: 'Obsidian Black Metallic', hex: '#141518' },
+      { name: 'High-Tech Silver', hex: '#c7ccd4' },
+      { name: 'Polar White', hex: '#f4f5f7' },
+      { name: 'Selenite Grey', hex: '#6b7280' },
+      { name: 'Nautical Blue', hex: '#1e3a5f' },
+    ];
+
+    // 30 Curated Mercedes-Benz Demo Vehicles (Illustrative Pricing & Specs)
+    const VEHICLES = [
+      { id: 1, name: 'Mercedes-Benz A-Class', category: 'Sedan', fuel: 'Petrol', price: 42000, year: 2025, engine: '2.0L Turbo I4 (Demo)', hp: 221, topSpeed: 250, accel: 6.2, popular: false, img: 'https://images.unsplash.com/photo-1618843479313-40f8afb4b4d8?auto=format&fit=crop&w=900&q=80' },
+      { id: 2, name: 'Mercedes-Benz C-Class', category: 'Sedan', fuel: 'Petrol', price: 51000, year: 2025, engine: '2.0L Mild-Hybrid I4 (Demo)', hp: 255, topSpeed: 250, accel: 6.0, popular: true, img: 'https://images.unsplash.com/photo-1617531653332-bd46c24f2068?auto=format&fit=crop&w=900&q=80' },
+      { id: 3, name: 'Mercedes-Benz E-Class', category: 'Sedan', fuel: 'Petrol', price: 66000, year: 2025, engine: '2.0L EQ Boost I4 (Demo)', hp: 255, topSpeed: 250, accel: 6.1, popular: true, img: 'https://images.unsplash.com/photo-1617531653520-bd466ee81600?auto=format&fit=crop&w=900&q=80' },
+      { id: 4, name: 'Mercedes-Benz S-Class', category: 'Sedan', fuel: 'Petrol', price: 124000, year: 2025, engine: '3.0L Inline-6 Turbo (Demo)', hp: 442, topSpeed: 250, accel: 4.5, popular: true, img: 'https://images.unsplash.com/photo-1563720223185-11003d516935?auto=format&fit=crop&w=900&q=80' },
+      { id: 5, name: 'Mercedes-Benz CLA', category: 'Sedan', fuel: 'Petrol', price: 46500, year: 2025, engine: '2.0L Turbo Coupe-Sedan (Demo)', hp: 221, topSpeed: 250, accel: 6.3, popular: false, img: 'https://images.unsplash.com/photo-1605559424843-9e4c228bf1c2?auto=format&fit=crop&w=900&q=80' },
+      { id: 6, name: 'Mercedes-Benz CLE', category: 'Sedan', fuel: 'Petrol', price: 59500, year: 2025, engine: '2.0L Turbo Grand Tourer (Demo)', hp: 255, topSpeed: 250, accel: 5.8, popular: false, img: 'https://images.unsplash.com/photo-1553440569-bcc63803a83d?auto=format&fit=crop&w=900&q=80' },
+      { id: 7, name: 'Mercedes-Benz CLS', category: 'Sedan', fuel: 'Petrol', price: 78000, year: 2024, engine: '3.0L Inline-6 Fastback (Demo)', hp: 362, topSpeed: 250, accel: 4.8, popular: false, img: 'https://images.unsplash.com/photo-1580273916550-e323be2ae537?auto=format&fit=crop&w=900&q=80' },
+      { id: 8, name: 'Mercedes-Benz GLA', category: 'SUV', fuel: 'Petrol', price: 44500, year: 2025, engine: '2.0L Compact SUV (Demo)', hp: 221, topSpeed: 240, accel: 6.6, popular: false, img: 'https://images.unsplash.com/photo-1606664515524-ed2f786a0bd6?auto=format&fit=crop&w=900&q=80' },
+      { id: 9, name: 'Mercedes-Benz GLB', category: 'SUV', fuel: 'Petrol', price: 48000, year: 2025, engine: '2.0L 7-Seat SUV (Demo)', hp: 221, topSpeed: 236, accel: 6.9, popular: false, img: 'https://images.unsplash.com/photo-1519641471654-76ce0107ad1b?auto=format&fit=crop&w=900&q=80' },
+      { id: 10, name: 'Mercedes-Benz GLC', category: 'SUV', fuel: 'Petrol', price: 54000, year: 2025, engine: '2.0L Mild-Hybrid SUV (Demo)', hp: 255, topSpeed: 243, accel: 6.2, popular: true, img: 'https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?auto=format&fit=crop&w=900&q=80' },
+      { id: 11, name: 'Mercedes-Benz GLE', category: 'SUV', fuel: 'Diesel', price: 72000, year: 2025, engine: '3.0L Diesel 4MATIC (Demo)', hp: 362, topSpeed: 250, accel: 5.5, popular: false, img: 'https://images.unsplash.com/photo-1549399542-7e3f8b79c341?auto=format&fit=crop&w=900&q=80' },
+      { id: 12, name: 'Mercedes-Benz GLS', category: 'SUV', fuel: 'Petrol', price: 96000, year: 2025, engine: '3.0L Full-Size Luxury SUV (Demo)', hp: 375, topSpeed: 250, accel: 5.9, popular: false, img: 'https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=900&q=80' },
+      { id: 13, name: 'Mercedes-Benz G-Class', category: 'SUV', fuel: 'Petrol', price: 152000, year: 2025, engine: '3.0L 4MATIC Off-Road (Demo)', hp: 443, topSpeed: 210, accel: 5.4, popular: true, img: 'https://images.unsplash.com/photo-1520031441872-265e4ff70366?auto=format&fit=crop&w=900&q=80' },
+      { id: 14, name: 'Mercedes-Benz EQE', category: 'Electric', fuel: 'Electric', price: 79000, year: 2025, engine: 'Dual-Motor Electric Sedan (Demo)', hp: 288, topSpeed: 210, accel: 6.2, popular: false, img: 'https://images.unsplash.com/photo-1619767886558-efdc259cde1a?auto=format&fit=crop&w=900&q=80' },
+      { id: 15, name: 'Mercedes-Benz EQS', category: 'Electric', fuel: 'Electric', price: 112000, year: 2025, engine: 'Flagship Electric Fastback (Demo)', hp: 355, topSpeed: 210, accel: 5.5, popular: false, img: 'https://images.unsplash.com/photo-1617814076367-b759c7d7e738?auto=format&fit=crop&w=900&q=80' },
+      { id: 16, name: 'Mercedes-Benz EQB', category: 'Electric', fuel: 'Electric', price: 56500, year: 2025, engine: 'Electric Compact SUV (Demo)', hp: 225, topSpeed: 160, accel: 7.7, popular: false, img: 'https://images.unsplash.com/photo-1593941707882-a5bba14938c7?auto=format&fit=crop&w=900&q=80' },
+      { id: 17, name: 'Mercedes-Benz EQA', category: 'Electric', fuel: 'Electric', price: 51500, year: 2025, engine: 'Electric Urban Crossover (Demo)', hp: 188, topSpeed: 160, accel: 8.6, popular: false, img: 'https://images.unsplash.com/photo-1560958089-b8a1929cea89?auto=format&fit=crop&w=900&q=80' },
+      { id: 18, name: 'Mercedes-AMG A 45', category: 'AMG', fuel: 'Petrol', price: 64000, year: 2025, engine: '2.0L Handcrafted AMG I4 (Demo)', hp: 416, topSpeed: 270, accel: 3.9, popular: false, img: 'https://images.unsplash.com/photo-1542362567-891b3e551e2b?auto=format&fit=crop&w=900&q=80' },
+      { id: 19, name: 'Mercedes-AMG C 63', category: 'AMG', fuel: 'Petrol', price: 89000, year: 2025, engine: 'AMG E Performance Hybrid (Demo)', hp: 671, topSpeed: 250, accel: 3.3, popular: false, img: 'https://images.unsplash.com/photo-1544636331-e26879cd4d9b?auto=format&fit=crop&w=900&q=80' },
+      { id: 20, name: 'Mercedes-AMG E 53', category: 'AMG', fuel: 'Petrol', price: 92000, year: 2025, engine: '3.0L AMG Hybrid Sedan (Demo)', hp: 577, topSpeed: 250, accel: 3.8, popular: false, img: 'https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?auto=format&fit=crop&w=900&q=80' },
+      { id: 21, name: 'Mercedes-AMG GT', category: 'AMG', fuel: 'Petrol', price: 145000, year: 2025, engine: '4.0L Biturbo V8 Coupe (Demo)', hp: 577, topSpeed: 315, accel: 3.1, popular: false, img: 'https://images.unsplash.com/photo-1502877338535-766e1452684a?auto=format&fit=crop&w=900&q=80' },
+      { id: 22, name: 'Mercedes-AMG SL', category: 'AMG', fuel: 'Petrol', price: 158000, year: 2025, engine: '4.0L Biturbo Roadster (Demo)', hp: 577, topSpeed: 315, accel: 3.5, popular: false, img: 'https://images.unsplash.com/photo-1552519507-da3b142c6e3d?auto=format&fit=crop&w=900&q=80' },
+      { id: 23, name: 'Mercedes-AMG G 63', category: 'AMG', fuel: 'Petrol', price: 192000, year: 2025, engine: '4.0L AMG Biturbo V8 (Demo)', hp: 577, topSpeed: 220, accel: 4.3, popular: true, img: 'https://images.unsplash.com/photo-1520031441872-265e4ff70366?auto=format&fit=crop&w=900&q=80' },
+      { id: 24, name: 'Mercedes-Maybach S-Class', category: 'Maybach', fuel: 'Petrol', price: 215000, year: 2025, engine: '4.0L V8 / V12 Flagship (Demo)', hp: 496, topSpeed: 250, accel: 4.7, popular: false, img: 'https://images.unsplash.com/photo-1563720223185-11003d516935?auto=format&fit=crop&w=900&q=80' },
+      { id: 25, name: 'Mercedes-Maybach GLS', category: 'Maybach', fuel: 'Petrol', price: 198000, year: 2025, engine: '4.0L Biturbo Luxury SUV (Demo)', hp: 550, topSpeed: 250, accel: 4.8, popular: false, img: 'https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=900&q=80' },
+      { id: 26, name: 'Mercedes-Maybach EQS SUV', category: 'Maybach', fuel: 'Electric', price: 228000, year: 2025, engine: 'Dual-Motor Electric Maybach (Demo)', hp: 649, topSpeed: 210, accel: 4.4, popular: false, img: 'https://images.unsplash.com/photo-1617814076367-b759c7d7e738?auto=format&fit=crop&w=900&q=80' },
+      { id: 27, name: 'Mercedes-Benz V-Class', category: 'Van', fuel: 'Diesel', price: 78000, year: 2025, engine: '2.0L Diesel Executive MPV (Demo)', hp: 237, topSpeed: 210, accel: 7.9, popular: false, img: 'https://images.unsplash.com/photo-1549399542-7e3f8b79c341?auto=format&fit=crop&w=900&q=80' },
+      { id: 28, name: 'Mercedes-Benz Vito', category: 'Van', fuel: 'Diesel', price: 53000, year: 2025, engine: '2.0L Versatile Van (Demo)', hp: 190, topSpeed: 196, accel: 9.2, popular: false, img: 'https://images.unsplash.com/photo-1519641471654-76ce0107ad1b?auto=format&fit=crop&w=900&q=80' },
+      { id: 29, name: 'Mercedes-Benz Sprinter', category: 'Van', fuel: 'Diesel', price: 62000, year: 2025, engine: '2.0L High-Roof Cargo/Tourer (Demo)', hp: 211, topSpeed: 161, accel: 10.5, popular: false, img: 'https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?auto=format&fit=crop&w=900&q=80' },
+      { id: 30, name: 'Mercedes-Benz EQV', category: 'Van', fuel: 'Electric', price: 84000, year: 2025, engine: 'Electric Multi-Purpose Van (Demo)', hp: 201, topSpeed: 160, accel: 9.5, popular: false, img: 'https://images.unsplash.com/photo-1619767886558-efdc259cde1a?auto=format&fit=crop&w=900&q=80' },
+    ];
+
+    const state = {
+      lang: 'uz',
+      theme: 'dark',
+      favorites: [],
+      compare: [],
+      profile: null,
+      heroIndex: 0,
+      filters: {
+        search: '',
+        category: 'all',
+        fuel: 'all',
+        maxPrice: 260000,
+        sort: 'featured',
+      },
+      activeDetailId: null,
+      selectedPaint: PAINT_OPTIONS[0].name,
+    };
+
+    function safeLoadStorage(key, fallback) {
+      try {
+        const raw = localStorage.getItem(key);
+        return raw ? JSON.parse(raw) : fallback;
+      } catch (err) {
+        return fallback;
+      }
+    }
+
+    function safeSaveStorage(key, value) {
+      try {
+        localStorage.setItem(key, JSON.stringify(value));
+      } catch (err) {
+        // Ignore storage quota errors in restricted environments
+      }
+    }
+
+    function handleImageFallback(imgEl, labelText) {
+      if (imgEl.dataset.fallbackApplied) return;
+      imgEl.dataset.fallbackApplied = 'true';
+      const svg = encodeURIComponent(
+        `<svg xmlns="http://www.w3.org/2000/svg" width="800" height="500" viewBox="0 0 800 500">
+          <defs>
+            <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0%" stop-color="#18181d"/>
+              <stop offset="100%" stop-color="#32363e"/>
+            </linearGradient>
+          </defs>
+          <rect width="800" height="500" fill="url(#g)"/>
+          <circle cx="400" cy="185" r="54" fill="none" stroke="#c7ccd4" stroke-width="3"/>
+          <polygon points="400,136 406,182 444,213 400,193 356,213 394,182" fill="#c7ccd4"/>
+          <text x="400" y="285" text-anchor="middle" fill="#e4e7ec" font-family="Inter, sans-serif" font-size="22" letter-spacing="4">${labelText}</text>
+          <text x="400" y="318" text-anchor="middle" fill="#9ca3af" font-family="Inter, sans-serif" font-size="13">DEMO SHOWCASE IMAGE</text>
+        </svg>`
+      );
+      imgEl.src = `data:image/svg+xml,${svg}`;
+    }
+
+    function showToast(message) {
+      const container = document.getElementById('toastContainer');
+      const toast = document.createElement('div');
+      toast.className = 'pointer-events-auto px-4 py-3 rounded-xl bg-zinc-900 dark:bg-white text-white dark:text-zinc-950 text-xs sm:text-sm font-medium shadow-luxury border border-zinc-700/50 dark:border-zinc-300 flex items-center justify-between gap-3 transition-all duration-300';
+      toast.innerHTML = `<span>${message}</span>`;
+      container.appendChild(toast);
+      setTimeout(() => {
+        toast.style.opacity = '0';
+        toast.style.transform = 'translateY(8px)';
+        setTimeout(() => toast.remove(), 250);
+      }, 2800);
+    }
+
+    function t(path) {
+      const parts = path.split('.');
+      let cur = TRANSLATIONS[state.lang] || TRANSLATIONS.en;
+      for (const p of parts) {
+        if (cur && Object.prototype.hasOwnProperty.call(cur, p)) {
+          cur = cur[p];
+        } else {
+          return path;
+        }
+      }
+      return cur;
+    }
+
+    function applyLanguage(lang) {
+      state.lang = TRANSLATIONS[lang] ? lang : 'en';
+      document.documentElement.lang = state.lang;
+      safeSaveStorage(STORAGE_KEYS.LANG, state.lang);
+      document.getElementById('languageSelect').value = state.lang;
+
+      document.querySelectorAll('[data-i18n]').forEach((el) => {
+        const key = el.getAttribute('data-i18n');
+        const val = t(key);
+        if (typeof val === 'string') {
+          el.textContent = val;
+        }
+      });
+
+      const heroTitleEl = document.getElementById('heroTitle');
+      const currentSlide = HERO_SLIDES[state.heroIndex] || HERO_SLIDES[0];
+      heroTitleEl.textContent = currentSlide.titles[state.lang] || currentSlide.titles.en;
+
+      if (state.profile && state.profile.name) {
+        document.getElementById('authNavLabel').textContent = state.profile.name;
+      }
+
+      renderFaq();
+      renderAllCatalogs();
+      updateBadges();
+    }
+
+    function applyTheme(theme) {
+      state.theme = theme === 'light' ? 'light' : 'dark';
+      safeSaveStorage(STORAGE_KEYS.THEME, state.theme);
+      if (state.theme === 'dark') {
+        document.documentElement.classList.add('dark');
+      } else {
+        document.documentElement.classList.remove('dark');
+      }
+    }
+
+    function updateBadges() {
+      document.getElementById('favoritesCountBadge').textContent = state.favorites.length;
+      document.getElementById('compareCountBadge').textContent = state.compare.length;
+    }
+
+    function toggleFavorite(id) {
+      const idx = state.favorites.indexOf(id);
+      if (idx === -1) {
+        state.favorites.push(id);
+        showToast(t('toast.favAdded'));
+      } else {
+        state.favorites.splice(idx, 1);
+        showToast(t('toast.favRemoved'));
+      }
+      safeSaveStorage(STORAGE_KEYS.FAVORITES, state.favorites);
+      updateBadges();
+      renderAllCatalogs();
+      if (!document.getElementById('favoritesModal').classList.contains('hidden')) {
+        renderFavoritesModal();
+      }
+    }
+
+    function toggleCompare(id) {
+      const idx = state.compare.indexOf(id);
+      if (idx !== -1) {
+        state.compare.splice(idx, 1);
+        showToast(t('toast.compareRemoved'));
+      } else {
+        if (state.compare.length >= 3) {
+          showToast(t('toast.compareLimit'));
+          return;
+        }
+        state.compare.push(id);
+        showToast(t('toast.compareAdded'));
+      }
+      safeSaveStorage(STORAGE_KEYS.COMPARE, state.compare);
+      updateBadges();
+      renderAllCatalogs();
+      if (!document.getElementById('compareModal').classList.contains('hidden')) {
+        renderCompareModal();
+      }
+    }
+
+    function createVehicleCard(car) {
+      const isFav = state.favorites.includes(car.id);
+      const isComp = state.compare.includes(car.id);
+      const formattedPrice = '$' + car.price.toLocaleString('en-US');
+
+      return `
+        <article class="card-hover rounded-2xl bg-white dark:bg-charcoal border border-zinc-200 dark:border-zinc-800 overflow-hidden flex flex-col justify-between shadow-sm hover:shadow-silverGlow">
+          <div>
+            <div class="relative h-48 sm:h-52 bg-zinc-200 dark:bg-graphite overflow-hidden group">
+              <img src="${car.img}" alt="${car.name}" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" onerror="handleImageFallback(this, '${car.name.replace(/'/g, '')}')" />
+              <div class="absolute top-3 left-3 flex items-center gap-1.5">
+                <span class="px-2.5 py-1 rounded-full text-[10px] font-bold tracking-wider uppercase bg-zinc-950/80 text-white backdrop-blur-sm">${car.category}</span>
+                <span class="px-2 py-1 rounded-full text-[10px] font-bold tracking-wider uppercase bg-white/90 text-zinc-900">${t('card.demoBadge')}</span>
+              </div>
+              <button type="button" onclick="toggleFavorite(${car.id})" aria-label="Toggle Favorite" class="absolute top-3 right-3 w-9 h-9 rounded-full bg-zinc-950/75 hover:bg-zinc-950 text-white flex items-center justify-center backdrop-blur-sm transition-colors">
+                <svg class="w-4 h-4 ${isFav ? 'text-rose-500 fill-current' : 'text-zinc-300'}" fill="${isFav ? 'currentColor' : 'none'}" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                  <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
+                </svg>
+              </button>
+            </div>
+
+            <div class="p-5 space-y-4">
+              <div class="flex items-start justify-between gap-2">
+                <h3 class="font-bold text-base sm:text-lg text-zinc-900 dark:text-white leading-snug">${car.name}</h3>
+                <span class="font-bold text-base sm:text-lg text-zinc-900 dark:text-zinc-100 shrink-0">${formattedPrice}</span>
+              </div>
+
+              <div class="grid grid-cols-2 gap-2 text-xs text-zinc-600 dark:text-zinc-400 bg-zinc-50 dark:bg-graphite p-3 rounded-xl border border-zinc-200/70 dark:border-zinc-800">
+                <div><span class="opacity-75">${t('card.year')}:</span> <strong class="text-zinc-900 dark:text-zinc-200">${car.year}</strong></div>
+                <div><span class="opacity-75">${t('card.hp')}:</span> <strong class="text-zinc-900 dark:text-zinc-200">${car.hp} HP</strong></div>
+                <div><span class="opacity-75">${t('card.topSpeed')}:</span> <strong class="text-zinc-900 dark:text-zinc-200">${car.topSpeed} km/h</strong></div>
+                <div><span class="opacity-75">${t('card.accel')}:</span> <strong class="text-zinc-900 dark:text-zinc-200">${car.accel}s</strong></div>
+                <div class="col-span-2 truncate"><span class="opacity-75">${t('card.engine')}:</span> <strong class="text-zinc-900 dark:text-zinc-200">${car.engine}</strong></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="px-5 pb-5 flex items-center gap-2">
+            <button type="button" onclick="openDetailModal(${car.id})" class="flex-1 py-2.5 px-3.5 rounded-xl bg-zinc-900 dark:bg-white text-white dark:text-zinc-950 hover:bg-zinc-800 dark:hover:bg-zinc-200 text-xs font-semibold transition-colors">
+              ${t('card.detailsBtn')}
+            </button>
+            <button type="button" onclick="toggleCompare(${car.id})" class="py-2.5 px-3 rounded-xl border text-xs font-semibold transition-colors ${isComp ? 'bg-zinc-200 dark:bg-zinc-700 border-zinc-400 dark:border-zinc-500 text-zinc-950 dark:text-white' : 'border-zinc-300 dark:border-zinc-700 text-zinc-700 dark:text-zinc-300 hover:bg-zinc-100 dark:hover:bg-graphite'}">
+              ${isComp ? t('card.compareAdded') : t('card.compareAdd')}
+            </button>
+          </div>
+        </article>
+      `;
+    }
+
+    function getFilteredVehicles() {
+      const { search, category, fuel, maxPrice, sort } = state.filters;
+      const q = search.trim().toLowerCase();
+
+      let list = VEHICLES.filter((car) => {
+        const matchesQuery = !q || car.name.toLowerCase().includes(q) || car.category.toLowerCase().includes(q) || car.engine.toLowerCase().includes(q);
+        const matchesCategory = category === 'all' || car.category === category;
+        const matchesFuel = fuel === 'all' || car.fuel === fuel;
+        const matchesPrice = car.price <= Number(maxPrice);
+        return matchesQuery && matchesCategory && matchesFuel && matchesPrice;
+      });
+
+      if (sort === 'priceAsc') {
+        list = [...list].sort((a, b) => a.price - b.price);
+      } else if (sort === 'priceDesc') {
+        list = [...list].sort((a, b) => b.price - a.price);
+      } else if (sort === 'hpDesc') {
+        list = [...list].sort((a, b) => b.hp - a.hp);
+      }
+
+      return list;
+    }
+
+    function renderAllCatalogs() {
+      const filtered = getFilteredVehicles();
+      const grid = document.getElementById('vehiclesGrid');
+      const emptyState = document.getElementById('emptyCatalogState');
+      document.getElementById('visibleModelsCount').textContent = filtered.length;
+
+      if (filtered.length === 0) {
+        grid.innerHTML = '';
+        emptyState.classList.remove('hidden');
+      } else {
+        emptyState.classList.add('hidden');
+        grid.innerHTML = filtered.map(createVehicleCard).join('');
+      }
+
+      const popularList = VEHICLES.filter((v) => v.popular).slice(0, 3);
+      document.getElementById('popularModelsGrid').innerHTML = popularList.map(createVehicleCard).join('');
+
+      const eqList = VEHICLES.filter((v) => v.category === 'Electric').slice(0, 3);
+      document.getElementById('electricModelsGrid').innerHTML = eqList.map(createVehicleCard).join('');
+
+      const amgList = VEHICLES.filter((v) => v.category === 'AMG').slice(0, 3);
+      document.getElementById('amgModelsGrid').innerHTML = amgList.map(createVehicleCard).join('');
+
+      const maybachList = VEHICLES.filter((v) => v.category === 'Maybach');
+      document.getElementById('maybachModelsGrid').innerHTML = maybachList.map(createVehicleCard).join('');
+
+      populateTestDriveModelSelect();
+    }
+
+    function quickFilterDivision(division) {
+      state.filters.category = division;
+      document.getElementById('categoryFilter').value = division;
+      renderAllCatalogs();
+      document.getElementById('models').scrollIntoView({ behavior: 'smooth' });
+    }
+
+    function resetFilters() {
+      state.filters = {
+        search: '',
+        category: 'all',
+        fuel: 'all',
+        maxPrice: 260000,
+        sort: 'featured',
+      };
+      document.getElementById('searchInput').value = '';
+      document.getElementById('categoryFilter').value = 'all';
+      document.getElementById('fuelFilter').value = 'all';
+      document.getElementById('maxPriceRange').value = 260000;
+      document.getElementById('maxPriceDisplay').textContent = '$260,000';
+      document.getElementById('sortSelect').value = 'featured';
+      renderAllCatalogs();
+    }
+
+    function openModal(id) {
+      const el = document.getElementById(id);
+      el.classList.remove('hidden');
+      el.classList.add('flex');
+    }
+
+    function closeModal(id) {
+      const el = document.getElementById(id);
+      el.classList.add('hidden');
+      el.classList.remove('flex');
+    }
+
+    function openDetailModal(id) {
+      const car = VEHICLES.find((v) => v.id === id);
+      if (!car) return;
+      state.activeDetailId = car.id;
+      state.selectedPaint = PAINT_OPTIONS[0].name;
+
+      document.getElementById('detailDivisionBadge').textContent = `${car.category} • ${car.fuel} • ${car.year}`;
+      document.getElementById('detailModalTitle').textContent = car.name;
+      document.getElementById('detailPrice').textContent = '$' + car.price.toLocaleString('en-US') + ' (Demo)';
+      document.getElementById('detailDescription').textContent = `${car.name} (demo specification) delivers refined comfort, precision handling, and signature Mercedes-Benz presence across daily and grand-touring journeys.`;
+      document.getElementById('detailInterior').textContent = 'Sculpted ergonomic seating, acoustic glazing, configurable ambient illumination, and high-resolution digital cockpit displays (demo description).';
+      document.getElementById('detailPowertrainNote').textContent = `${car.engine} producing ${car.hp} HP, ${car.topSpeed} km/h top speed, and 0–100 km/h in ${car.accel}s (demo figures).`;
+
+      const mainImg = document.getElementById('detailMainImage');
+      mainImg.src = car.img;
+      mainImg.alt = car.name;
+      mainImg.onerror = () => handleImageFallback(mainImg, car.name);
+
+      const gallery = [
+        car.img,
+        'https://images.unsplash.com/photo-1617531653332-bd46c24f2068?auto=format&fit=crop&w=900&q=80',
+        'https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=900&q=80',
+      ];
+      document.getElementById('detailThumbnails').innerHTML = gallery.map((src, idx) => `
+        <button type="button" onclick="document.getElementById('detailMainImage').src='${src}'" class="w-20 h-14 rounded-xl overflow-hidden border border-zinc-300 dark:border-zinc-700 shrink-0 focus:ring-2 focus:ring-zinc-500">
+          <img src="${src}" alt="${car.name} view ${idx + 1}" class="w-full h-full object-cover" onerror="handleImageFallback(this, '${car.name}')" />
+        </button>
+      `).join('');
+
+      document.getElementById('detailSelectedColorName').textContent = state.selectedPaint;
+      document.getElementById('detailColorSwatches').innerHTML = PAINT_OPTIONS.map((p) => `
+        <button type="button" title="${p.name}" onclick="selectDetailPaint('${p.name}')" class="w-7 h-7 rounded-full border-2 ${state.selectedPaint === p.name ? 'border-emerald-500 scale-110' : 'border-zinc-400'} transition-transform" style="background-color:${p.hex}"></button>
+      `).join('');
+
+      document.getElementById('detailSpecsGrid').innerHTML = `
+        <div class="p-3 rounded-xl bg-zinc-50 dark:bg-graphite border border-zinc-200 dark:border-zinc-800">
+          <div class="text-[11px] text-zinc-500">${t('card.hp')}</div>
+          <div class="font-bold text-sm mt-0.5">${car.hp} HP</div>
+        </div>
+        <div class="p-3 rounded-xl bg-zinc-50 dark:bg-graphite border border-zinc-200 dark:border-zinc-800">
+          <div class="text-[11px] text-zinc-500">${t('card.topSpeed')}</div>
+          <div class="font-bold text-sm mt-0.5">${car.topSpeed} km/h</div>
+        </div>
+        <div class="p-3 rounded-xl bg-zinc-50 dark:bg-graphite border border-zinc-200 dark:border-zinc-800">
+          <div class="text-[11px] text-zinc-500">${t('card.accel')}</div>
+          <div class="font-bold text-sm mt-0.5">${car.accel}s</div>
+        </div>
+        <div class="p-3 rounded-xl bg-zinc-50 dark:bg-graphite border border-zinc-200 dark:border-zinc-800">
+          <div class="text-[11px] text-zinc-500">${t('card.year')}</div>
+          <div class="font-bold text-sm mt-0.5">${car.year}</div>
+        </div>
+      `;
+
+      document.getElementById('detailBuyNowBtn').onclick = () => {
+        closeModal('detailModal');
+        openBuyNowModal(car.name, state.selectedPaint);
+      };
+      document.getElementById('detailTestDriveBtn').onclick = () => {
+        closeModal('detailModal');
+        openTestDriveModal(car.name);
+      };
+
+      openModal('detailModal');
+    }
+
+    function selectDetailPaint(name) {
+      state.selectedPaint = name;
+      document.getElementById('detailSelectedColorName').textContent = name;
+      if (state.activeDetailId) {
+        const car = VEHICLES.find((v) => v.id === state.activeDetailId);
+        if (car) {
+          document.getElementById('detailColorSwatches').innerHTML = PAINT_OPTIONS.map((p) => `
+            <button type="button" title="${p.name}" onclick="selectDetailPaint('${p.name}')" class="w-7 h-7 rounded-full border-2 ${state.selectedPaint === p.name ? 'border-emerald-500 scale-110' : 'border-zinc-400'} transition-transform" style="background-color:${p.hex}"></button>
+          `).join('');
+        }
+      }
+    }
+
+    function renderFavoritesModal() {
+      const container = document.getElementById('favoritesListContainer');
+      const items = VEHICLES.filter((v) => state.favorites.includes(v.id));
+      if (items.length === 0) {
+        container.innerHTML = `<p class="text-center py-8 text-sm text-zinc-500">${t('favorites.empty')}</p>`;
+        return;
+      }
+      container.innerHTML = items.map((car) => `
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 p-4 rounded-2xl bg-zinc-50 dark:bg-graphite border border-zinc-200 dark:border-zinc-800">
+          <div class="flex items-center gap-4">
+            <img src="${car.img}" alt="${car.name}" class="w-20 h-14 rounded-xl object-cover shrink-0" onerror="handleImageFallback(this, '${car.name}')" />
+            <div>
+              <h4 class="font-bold text-sm sm:text-base text-zinc-900 dark:text-white">${car.name}</h4>
+              <p class="text-xs text-zinc-500 dark:text-zinc-400">$${car.price.toLocaleString('en-US')} (Demo) • ${car.hp} HP • 0–100 ${car.accel}s</p>
+            </div>
+          </div>
+          <div class="flex items-center gap-2 self-end sm:self-center">
+            <button type="button" onclick="closeModal('favoritesModal'); openDetailModal(${car.id})" class="px-3 py-2 rounded-xl bg-zinc-900 dark:bg-white text-white dark:text-zinc-950 text-xs font-semibold">${t('card.detailsBtn')}</button>
+            <button type="button" onclick="toggleFavorite(${car.id})" class="px-3 py-2 rounded-xl border border-rose-500/40 text-rose-500 hover:bg-rose-500/10 text-xs font-semibold">${t('favorites.remove')}</button>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function openFavoritesModal() {
+      renderFavoritesModal();
+      openModal('favoritesModal');
+    }
+
+    function renderCompareModal() {
+      const container = document.getElementById('compareContentContainer');
+      const items = VEHICLES.filter((v) => state.compare.includes(v.id));
+      if (items.length === 0) {
+        container.innerHTML = `<p class="text-center py-8 text-sm text-zinc-500">${t('compare.empty')}</p>`;
+        return;
+      }
+
+      const rows = [
+        { label: t('compare.price'), vals: items.map((c) => '$' + c.price.toLocaleString('en-US') + ' (Demo)') },
+        { label: t('compare.engine'), vals: items.map((c) => c.engine) },
+        { label: t('compare.hp'), vals: items.map((c) => `${c.hp} HP`) },
+        { label: t('compare.topSpeed'), vals: items.map((c) => `${c.topSpeed} km/h`) },
+        { label: t('compare.accel'), vals: items.map((c) => `${c.accel}s`) },
+        { label: t('compare.body'), vals: items.map((c) => c.category) },
+        { label: t('compare.fuel'), vals: items.map((c) => c.fuel) },
+      ];
+
+      container.innerHTML = `
+        <div class="flex justify-end mb-3">
+          <button type="button" onclick="clearCompareList()" class="px-3.5 py-1.5 rounded-xl border border-zinc-300 dark:border-zinc-700 text-xs font-semibold hover:bg-zinc-100 dark:hover:bg-graphite">${t('compare.clearAll')}</button>
+        </div>
+        <table class="w-full text-left border-collapse text-xs sm:text-sm">
+          <thead>
+            <tr class="border-b border-zinc-200 dark:border-zinc-800">
+              <th class="py-3 pr-4 font-semibold text-zinc-500">${t('compare.spec')}</th>
+              ${items.map((c) => `
+                <th class="py-3 px-3 min-w-[170px]">
+                  <div class="font-bold text-zinc-900 dark:text-white">${c.name}</div>
+                  <button type="button" onclick="toggleCompare(${c.id})" class="text-[11px] text-rose-500 hover:underline mt-0.5">${t('favorites.remove')}</button>
+                </th>
+              `).join('')}
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-zinc-200 dark:divide-zinc-800">
+            ${rows.map((r) => `
+              <tr>
+                <td class="py-3 pr-4 font-semibold text-zinc-600 dark:text-zinc-400">${r.label}</td>
+                ${r.vals.map((val) => `<td class="py-3 px-3 font-medium text-zinc-900 dark:text-zinc-100">${val}</td>`).join('')}
+              </tr>
+            `).join('')}
+          </tbody>
+        </table>
+      `;
+    }
+
+    function clearCompareList() {
+      state.compare = [];
+      safeSaveStorage(STORAGE_KEYS.COMPARE, []);
+      updateBadges();
+      renderAllCatalogs();
+      renderCompareModal();
+    }
+
+    function openCompareModal() {
+      renderCompareModal();
+      openModal('compareModal');
+    }
+
+    function switchAuthTab(tab) {
+      const isLogin = tab === 'login';
+      document.getElementById('loginForm').classList.toggle('hidden', !isLogin);
+      document.getElementById('registerForm').classList.toggle('hidden', isLogin);
+      document.getElementById('tabLoginBtn').className = isLogin
+        ? 'px-4 py-2 rounded-xl text-xs font-semibold bg-zinc-900 dark:bg-white text-white dark:text-zinc-950'
+        : 'px-4 py-2 rounded-xl text-xs font-semibold bg-zinc-100 dark:bg-graphite text-zinc-700 dark:text-zinc-300';
+      document.getElementById('tabRegisterBtn').className = !isLogin
+        ? 'px-4 py-2 rounded-xl text-xs font-semibold bg-zinc-900 dark:bg-white text-white dark:text-zinc-950'
+        : 'px-4 py-2 rounded-xl text-xs font-semibold bg-zinc-100 dark:bg-graphite text-zinc-700 dark:text-zinc-300';
+    }
+
+    function openAuthModal() {
+      switchAuthTab('login');
+      openModal('authModal');
+    }
+
+    function togglePasswordVisibility(inputId) {
+      const inp = document.getElementById(inputId);
+      inp.type = inp.type === 'password' ? 'text' : 'password';
+    }
+
+    function populateTestDriveModelSelect(preselectedName = '') {
+      const sel = document.getElementById('tdModelSelect');
+      if (!sel) return;
+      sel.innerHTML = VEHICLES.map((v) => `<option value="${v.name}" ${v.name === preselectedName ? 'selected' : ''}>${v.name}</option>`).join('');
+    }
+
+    function openTestDriveModal(modelName = '') {
+      populateTestDriveModelSelect(modelName || VEHICLES[0].name);
+      openModal('testDriveModal');
+    }
+
+    function openBuyNowModal(modelName = 'Mercedes-Benz S-Class', colorName = PAINT_OPTIONS[0].name) {
+      document.getElementById('buyModel').value = modelName;
+      document.getElementById('buyColor').value = colorName;
+      openModal('buyNowModal');
+    }
+
+    function renderFaq() {
+      const items = t('faq.items');
+      if (!Array.isArray(items)) return;
+      document.getElementById('faqContainer').innerHTML = items.map((item, idx) => `
+        <div class="rounded-2xl bg-white dark:bg-graphite border border-zinc-200 dark:border-zinc-800 overflow-hidden">
+          <button type="button" onclick="toggleFaqItem(${idx})" class="w-full px-5 py-4 text-left flex items-center justify-between gap-4 font-semibold text-sm sm:text-base text-zinc-900 dark:text-white">
+            <span>${item.q}</span>
+            <span id="faqIcon-${idx}" class="text-lg font-light">+</span>
+          </button>
+          <div id="faqBody-${idx}" class="hidden px-5 pb-4 text-sm text-zinc-600 dark:text-zinc-300 leading-relaxed">
+            ${item.a}
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function toggleFaqItem(idx) {
+      const body = document.getElementById(`faqBody-${idx}`);
+      const icon = document.getElementById(`faqIcon-${idx}`);
+      const isHidden = body.classList.contains('hidden');
+      body.classList.toggle('hidden', !isHidden);
+      icon.textContent = isHidden ? '−' : '+';
+    }
+
+    function setHeroSlide(index) {
+      state.heroIndex = (index + HERO_SLIDES.length) % HERO_SLIDES.length;
+      const slide = HERO_SLIDES[state.heroIndex];
+      const img = document.getElementById('heroSlideImage');
+      img.src = slide.image;
+      img.onerror = () => handleImageFallback(img, 'MERCEDES-BENZ');
+      document.getElementById('heroTitle').textContent = slide.titles[state.lang] || slide.titles.en;
+
+      document.querySelectorAll('.hero-dot').forEach((dot, idx) => {
+        if (idx === state.heroIndex) {
+          dot.className = 'hero-dot h-1.5 w-8 rounded-full bg-white transition-all';
+        } else {
+          dot.className = 'hero-dot h-1.5 w-3 rounded-full bg-white/40 hover:bg-white/70 transition-all';
+        }
+      });
+    }
+
+    function bindEvents() {
+      document.getElementById('languageSelect').addEventListener('change', (e) => applyLanguage(e.target.value));
+
+      document.getElementById('themeToggleBtn').addEventListener('click', () => {
+        applyTheme(state.theme === 'dark' ? 'light' : 'dark');
+      });
+
+      document.getElementById('openFavoritesBtn').addEventListener('click', openFavoritesModal);
+      document.getElementById('openCompareBtn').addEventListener('click', openCompareModal);
+      document.getElementById('openAuthBtn').addEventListener('click', openAuthModal);
+      document.getElementById('mobileAuthBtn').addEventListener('click', () => {
+        toggleMobileMenu(false);
+        openAuthModal();
+      });
+
+      const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+      mobileMenuBtn.addEventListener('click', () => {
+        const panel = document.getElementById('mobileMenuPanel');
+        toggleMobileMenu(panel.classList.contains('hidden'));
+      });
+
+      document.querySelectorAll('.mobile-nav-link').forEach((link) => {
+        link.addEventListener('click', () => toggleMobileMenu(false));
+      });
+
+      document.getElementById('nextHeroSlideBtn').addEventListener('click', () => setHeroSlide(state.heroIndex + 1));
+      document.querySelectorAll('.hero-dot').forEach((dot) => {
+        dot.addEventListener('click', () => setHeroSlide(Number(dot.getAttribute('data-slide'))));
+      });
+
+      document.getElementById('heroTestDriveBtn').addEventListener('click', () => openTestDriveModal());
+
+      document.getElementById('searchInput').addEventListener('input', (e) => {
+        state.filters.search = e.target.value;
+        renderAllCatalogs();
+      });
+
+      document.getElementById('categoryFilter').addEventListener('change', (e) => {
+        state.filters.category = e.target.value;
+        renderAllCatalogs();
+      });
+
+      document.getElementById('fuelFilter').addEventListener('change', (e) => {
+        state.filters.fuel = e.target.value;
+        renderAllCatalogs();
+      });
+
+      document.getElementById('sortSelect').addEventListener('change', (e) => {
+        state.filters.sort = e.target.value;
+        renderAllCatalogs();
+      });
+
+      document.getElementById('maxPriceRange').addEventListener('input', (e) => {
+        const val = Number(e.target.value);
+        state.filters.maxPrice = val;
+        document.getElementById('maxPriceDisplay').textContent = '$' + val.toLocaleString('en-US');
+        renderAllCatalogs();
+      });
+
+      document.getElementById('resetFiltersBtn').addEventListener('click', resetFilters);
+      document.getElementById('emptyResetBtn').addEventListener('click', resetFilters);
+
+      // Login Form (never saves password in localStorage)
+      document.getElementById('loginForm').addEventListener('submit', (e) => {
+        e.preventDefault();
+        const identifier = document.getElementById('loginIdentifier').value.trim();
+        const pwd = document.getElementById('loginPassword').value;
+        const errEl = document.getElementById('authErrorMsg');
+        if (pwd.length < 6) {
+          errEl.textContent = t('auth.shortPassword');
+          errEl.classList.remove('hidden');
+          return;
+        }
+        errEl.classList.add('hidden');
+        const displayName = identifier.split('@')[0] || 'Client';
+        state.profile = { name: displayName, contact: identifier };
+        safeSaveStorage(STORAGE_KEYS.PROFILE, state.profile);
+        document.getElementById('authNavLabel').textContent = displayName;
+        closeModal('authModal');
+        showToast(`${t('auth.welcomeDemo')}: ${displayName}`);
+      });
+
+      // Register Form (never saves password in localStorage)
+      document.getElementById('registerForm').addEventListener('submit', (e) => {
+        e.preventDefault();
+        const first = document.getElementById('regFirstName').value.trim();
+        const last = document.getElementById('regLastName').value.trim();
+        const email = document.getElementById('regEmail').value.trim();
+        const pwd = document.getElementById('regPassword').value;
+        const confirmPwd = document.getElementById('regConfirmPassword').value;
+        const errEl = document.getElementById('regErrorMsg');
+
+        if (pwd.length < 6) {
+          errEl.textContent = t('auth.shortPassword');
+          errEl.classList.remove('hidden');
+          return;
+        }
+        if (pwd !== confirmPwd) {
+          errEl.textContent = t('auth.passwordMismatch');
+          errEl.classList.remove('hidden');
+          return;
+        }
+        errEl.classList.add('hidden');
+        const fullName = `${first} ${last}`.trim();
+        state.profile = { name: fullName, contact: email };
+        safeSaveStorage(STORAGE_KEYS.PROFILE, state.profile);
+        document.getElementById('authNavLabel').textContent = fullName;
+        closeModal('authModal');
+        showToast(`${t('auth.welcomeDemo')}: ${fullName}`);
+      });
+
+      // Test Drive Form
+      document.getElementById('testDriveForm').addEventListener('submit', (e) => {
+        e.preventDefault();
+        e.target.reset();
+        closeModal('testDriveModal');
+        showToast(t('testDrive.success'));
+      });
+
+      // Buy Now Form
+      document.getElementById('buyNowForm').addEventListener('submit', (e) => {
+        e.preventDefault();
+        e.target.reset();
+        closeModal('buyNowModal');
+        showToast(t('buyNow.success'));
+      });
+
+      // Contact Form
+      document.getElementById('contactForm').addEventListener('submit', (e) => {
+        e.preventDefault();
+        e.target.reset();
+        showToast(t('toast.contactSent'));
+      });
+
+      // Backdrop click closes modals
+      ['detailModal', 'favoritesModal', 'compareModal', 'authModal', 'testDriveModal', 'buyNowModal'].forEach((id) => {
+        document.getElementById(id).addEventListener('click', (e) => {
+          if (e.target.id === id) closeModal(id);
+        });
+      });
+    }
+
+    function toggleMobileMenu(show) {
+      const panel = document.getElementById('mobileMenuPanel');
+      const btn = document.getElementById('mobileMenuBtn');
+      const burger = document.getElementById('hamburgerIcon');
+      const closeIcon = document.getElementById('closeMenuIcon');
+      panel.classList.toggle('hidden', !show);
+      btn.setAttribute('aria-expanded', String(show));
+      burger.classList.toggle('hidden', show);
+      closeIcon.classList.toggle('hidden', !show);
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      state.lang = safeLoadStorage(STORAGE_KEYS.LANG, 'uz');
+      state.theme = safeLoadStorage(STORAGE_KEYS.THEME, 'dark');
+      state.favorites = safeLoadStorage(STORAGE_KEYS.FAVORITES, []);
+      state.compare = safeLoadStorage(STORAGE_KEYS.COMPARE, []);
+      state.profile = safeLoadStorage(STORAGE_KEYS.PROFILE, null);
+
+      applyTheme(state.theme);
+      bindEvents();
+      applyLanguage(state.lang);
+      setHeroSlide(0);
+    });
+  </script>
+</body>
+
+</html>
